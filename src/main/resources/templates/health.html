@@ -374,7 +374,7 @@
                             <ul class="pagination" style="float: right;">
 
 
-                                <li th:classappend="${selectedPos-1<1?'disabled':''}"  class="page-item">
+                                <li th:classappend="${(selectedPos-1)<1?'disabled':'able'}"  class="page-item">
                                     <a class="page-link" aria-label="Previous" th:href="@{health(fp=${fp}, pos=${selectedPos}-1, lp=${lp})}">
                                         <span style="color: #3FACE4;" aria-hidden="true">&laquo;</span>
                                     </a>
@@ -384,14 +384,14 @@
                                 <th:block th:each="i: ${#numbers.sequence(fp, lp, 1)}">
 
                                     <!-- Main  -->
-                                    <li th:classappend="${i==selectedPos}?'active':''" class="page-item" >
+                                    <li th:classappend="${i==selectedPos}?'active':'not-active'" class="page-item" >
                                         <a class="page-link" th:text="${i}" th:href="@{health(fp=${fp}, pos=${i}, lp=${lp})}"></a>
                                     </li>
 
                                 </th:block>
 
 
-                                <li th:classappend="${(selectedPos+1)>pageCount?'disabled':''}" class="page-item">
+                                <li th:classappend="${(selectedPos+1)>pageCount?'disabled':'able'}" class="page-item">
                                     <a class="page-link" aria-label="Next" th:href="@{health(fp=${fp}, pos=${selectedPos}+1, lp=${lp})}">
                                         <span style="color: #3FACE4;" aria-hidden="true">&raquo;</span>
                                     </a>
