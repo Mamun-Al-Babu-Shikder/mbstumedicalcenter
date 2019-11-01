@@ -1,0 +1,321 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  background: #fff;
+  border-bottom: 20px solid #eee;
+  box-shadow: 5px 3px 8px rgba(36, 36, 36, 0.233);
+}
+
+.option a {
+  margin: 0px 13px;
+  font-size: 14px;
+  padding: 10px 0px;
+  text-decoration: none;
+  transition: 100ms;
+  color: rgba(65, 65, 65, 0.746);
+  font-family: "Times New Roman", Times, serif;
+}
+
+.option a:hover {
+  color: #1879e0dc;
+}
+
+.active-option a {
+  color: #1879e0dc;
+}
+
+.banner {
+  background: url("images/home.jpg") no-repeat center bottom;
+  position: relative;
+  z-index: 0;
+  height: 650px;
+}
+
+.banner-overlay {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.534);
+  z-index: 0;
+}
+
+.get-start-btn {
+  padding: 13px 25px;
+  margin: 0px 0px 0px 10px;
+  width: 160px;
+  height: 50px;
+  color: #fff;
+  background-color: #32beffdc;
+  border: 1px solid #32beffdc;
+  border-radius: 50px;
+  outline: none !important;
+  transition: 250ms;
+  text-decoration: none !important;
+}
+
+.get-start-btn:hover {
+  background-color: transparent;
+  color: #32beffdc;
+}
+
+.main-div {
+  background: #fff;
+  height: auto;
+}
+
+.authontication-form {
+  padding: 40px 20px;
+  box-shadow: 0px 1px 7px 1px rgb(185, 185, 185);
+  border-radius: 3px;
+}
+
+/*
+* footer css
+*/
+
+.footer-area {
+  padding: 50px 0px 30px 0px;
+  background: #222222;
+}
+
+.f-col {
+  padding: 20px 20px;
+}
+
+.f-title {
+  color: #fff;
+}
+
+.dev-name {
+  margin-top: 20px;
+  padding: 0px;
+  list-style: none;
+}
+
+.dev-name > li > a {
+  text-decoration: none;
+  color: #777777;
+  list-style: none;
+  font-size: 14px;
+}
+
+.dev-social a {
+  padding: 5px;
+  margin: 3px;
+  color: rgb(216, 216, 216);
+  float: left;
+  background: #000;
+}
+
+.dev-social a:hover {
+  color: #32beffdc;
+}
+
+.web-link {
+  text-decoration: none;
+  color: #777777;
+  list-style: none;
+  font-size: 14px;
+}
+
+.web-link:hover {
+  color: #3face4;
+}
+
+.footer-area .dev-name li a:hover {
+  color: #3face4;
+}
+
+.subscribe-email {
+  margin: 3px 0px;
+  width: 250px;
+  background: #2d2d2d;
+  color: #fff;
+  border-radius: 50px;
+  border: none !important;
+  font-size: 14px;
+  padding: 7px 15px;
+  outline: none !important;
+}
+
+.subscribe-btn {
+  margin: 3px 0px 0px 10px;
+  width: 120px;
+  height: 35px;
+  color: #fff;
+  background-color: #32beffdc;
+  border: 1px solid #32beffdc;
+  border-radius: 50px;
+  outline: none !important;
+  transition: 250ms;
+}
+
+.subscribe-btn:hover {
+  background-color: transparent;
+  color: #32beffdc;
+}
+
+/* Home page Our Activity and Service Block*/
+.service-holder {
+  padding: 30px 5px;
+  cursor: pointer;
+}
+
+.service-holder i {
+  color: #3face4;
+}
+
+.service-holder h4 {
+  transition: 300ms;
+  padding-top: 15px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.service-holder p {
+  font-size: 14px;
+  color: rgb(126, 126, 126);
+}
+
+.service-holder:hover h4 {
+  color: #2f8becdc;
+}
+
+.service-holder:hover i {
+  scale: 3;
+}
+
+.doctor-info-holder {
+  cursor: pointer;
+  transition: 500ms;
+  background: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 2px rgba(153, 153, 153, 0.459);
+}
+
+.doctor-info-holder img {
+  scale: 1;
+}
+
+.doctor-info-holder h6 {
+  transition: 500ms;
+  padding: 15px 10px 0px 10px;
+}
+
+.doctor-info-holder p {
+  margin: 0px;
+  padding: 0px 10px 5px 10px;
+  font-size: 13px;
+}
+
+.doctor-info-holder:hover {
+  box-shadow: 1px 10px 20px rgba(153, 153, 153, 0.397);
+}
+
+.doctor-info-holder:hover h6 {
+  color: #3face4;
+}
+
+.doctor-info-holder:hover .dr-social a {
+  color: #fff;
+  background: #3face4;
+}
+
+.dr-social a {
+  margin: 0px 5px;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  transition: 500ms;
+  border: 1px solid #32beffdc;
+}
+
+/*
+ Helth Tips
+*/
+
+.post-holder {
+  padding: 10px 0px;
+}
+
+.post-details h4 {
+  color: #000;
+  margin: 15px 0px;
+}
+
+.post-details p {
+  color: rgb(74, 74, 78);
+  padding: 3px 0px 5px 0px;
+  height: 75px;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-post-container {
+  margin: 10px 0px 0px 0px;
+  padding: 0px 5px;
+
+  /* box-shadow: 0px 0px 1px #e4e4e9; */
+}
+
+.book-holder {
+  padding: 0px 0px 25px 0px;
+}
+
+.book-holder a {
+  color: #3face4;
+  text-decoration: none;
+}
+.post-meta {
+  text-align: right;
+  list-style: none;
+  color: #333;
+  font-size: 12px;
+}
+
+.post-meta li {
+  cursor: default;
+  margin: 0px;
+  padding: 5px 0px;
+}
+
+.post-meta li i {
+  color: #3face4;
+}
+
+.post-like-btn {
+  float: left;
+  margin: 0px 0px 80px 0px;
+  padding: 5px 10px;
+  border: 1px solid #3face4;
+  cursor: pointer;
+  color: #666;
+  border-radius: 2px;
+  text-decoration: none !important;
+  transition: 300ms;
+  font-size: 13px;
+  font-weight: 550;
+}
+
+.post-like-btn:hover {
+  background: #3face4;
+  color: #fff;
+}
+
+.blog_post div img {
+  transition: transform 0.5s ease;
+}
+
+.blog_post:hover div img {
+  transform: scale(1.1);
+}
+
+.side-post:hover {
+  color: #3face4;
+  cursor: pointer;
+}

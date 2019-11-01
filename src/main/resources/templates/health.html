@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Health | MBSTU Medical Center</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.png" />
+    <!-- Bootstrap core CSS -->
+    <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+    <link href="user-side-style.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <script src="source/jquery/jquery.min.js"></script>
+    <script src="source/bootstrap/js/bootstrap.js"></script>
+    <script src="source/jquery/my_canvas.js"></script>
+    <script src="script.js"></script>
+    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
+    <!-- <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
+
+    <style>
+
+        /*
+ Helth Tips
+*/
+
+        .post-holder {
+            padding: 10px 0px;
+        }
+
+        .post-details h4 {
+            color: #000;
+            margin: 15px 0px;
+        }
+
+        .post-details p {
+            color: rgb(74, 74, 78);
+            padding: 3px 0px 5px 0px;
+            height: 75px;
+            display: -webkit-box;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-post-container {
+            margin: 10px 0px 0px 0px;
+            padding: 0px 5px;
+
+            /* box-shadow: 0px 0px 1px #e4e4e9; */
+        }
+
+        .book-holder {
+            padding: 0px 0px 25px 0px;
+        }
+
+        .book-holder a {
+            color: #3face4;
+            text-decoration: none;
+        }
+
+        .post-meta {
+            text-align: right;
+            list-style: none;
+            color: #333;
+            font-size: 12px;
+        }
+
+        .post-meta li {
+            cursor: default;
+            margin: 0px;
+            padding: 5px 0px;
+        }
+
+        .post-meta li i {
+            color: #3face4;
+        }
+
+        .post-like-btn {
+            float: left;
+            margin: 0px 0px 80px 0px;
+            padding: 5px 10px;
+            border: 1px solid #3face4;
+            cursor: pointer;
+            color: #666;
+            border-radius: 2px;
+            text-decoration: none !important;
+            transition: 300ms;
+            font-size: 13px;
+            font-weight: 500;
+            background: transparent;
+        }
+
+        .post-like-btn:hover {
+            background: #3face4;
+            color: #fff;
+        }
+
+        .blog_post div img {
+            transition: transform 0.5s ease;
+        }
+
+        .blog_post:hover div img {
+            transform: scale(1.1);
+        }
+
+        .side-post:hover {
+            color: #3face4;
+            cursor: pointer;
+        }
+
+
+
+    </style>
+
+
+</head>
+
+<body>
+
+
+
+
+    <div id="overlay" style="display: none;">
+        <!-- <div class="spinner-grow text-muted"></div>
+                                    <div class="spinner-grow text-primary"></div>
+                                    <div class="spinner-grow text-success"></div>
+                                    <div class="spinner-grow text-info"></div>
+                                    <div class="spinner-grow text-warning"></div> gmail@gmail.com
+                                    <div class="spinner-grow text-danger"></div>
+                                    <div class="spinner-grow text-secondary"></div>
+                                    <div class="spinner-grow text-dark"></div>
+                                    <div class="spinner-grow text-light"></div> -->
+        <div class="spinner-border text-primary" style="z-index:27; width: 100px; height:100px"></div>
+    </div>
+
+
+    <div data-delay="3000" style="position:fixed; display: block; left: 3%;top: 80%; z-index: 10;" class="toast2">
+        <div id="tost2" class="alert alert-success alert-dismissible fade hide">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong>
+            <p id="toast-mgs2"> </p>
+        </div>
+    </div>
+
+
+    <div data-delay="3000" style="position:fixed; display: block; left: 3%;top: 80%; z-index: 10;" class="toast2">
+        <div id="tost" class="alert alert-danger alert-dismissible fade hide">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Warning!</strong>
+            <p id="toast-mgs"> </p>
+        </div>
+    </div>
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top my-navbar">
+        <!-- <div class="container"> -->
+        <img style="width: 35px; height:35px; margin: 10px;" class="img img-responsive" src="images/icon.png" />
+
+        <p style="
+            font-family:'Times New Roman', Times, serif;
+            padding: 0 15px; font-weight: 700; font-size: 18px; margin-top: 15px;">MBSTU MEDICAL CENTER</p>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="option">
+                    <a href="/"> <i class="fa fa-home" aria-hidden="true"></i> HOME </a>
+                </li>
+                <li class="option active-option">
+                    <a href="health"> <i class="fa fa-h-square" aria-hidden="true"></i> HEALTH </a>
+                </li>
+                <li class="option">
+                    <a href="medicine"> <i class="fa fa-medkit" aria-hidden="true"></i> MEDICINE </a>
+                </li>
+                <!-- <li class="option">
+                    <a href="#"> <i class="fa fa-info" aria-hidden="true"></i> ABOUT </a>
+                </li>
+                <li class="option">
+                    <a href="#"> <i class="fa fa-user-md" aria-hidden="true"></i> DOCTORS </a>
+                </li> -->
+                <li class="option">
+                    <a href="contact"> <i class="fa fa-volume-control-phone" aria-hidden="true"></i> CONTACT </a>
+                </li>
+                <li class="option ">
+                    <a href="login-page"> <i class="fa fa-user" aria-hidden="true"></i> MY PROFILE </a>
+                </li>
+                <!-- <li class="nav-item active2 ">
+                      <a class="nav-link2 logout-btn" href="#"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a>
+                    </li> -->
+
+            </ul>
+        </div>
+
+        <!-- </div> -->
+
+    </nav>
+
+
+
+
+    <div>
+
+
+
+        <style>
+            .banner {
+                background: url("images/banner-bg.jpg") no-repeat center bottom;
+                position: relative;
+                z-index: 0;
+                height: 400px;
+            }
+
+            .banner-overlay {
+                height: 100%;
+                background: rgba(0, 0, 0, 0.534);
+                z-index: 0;
+            }
+
+
+            .input-box {
+                margin: 7px 3px;
+                padding: 7px 10px;
+                border: 1px solid #ddd;
+                width: 100%;
+                font-size: 14px;
+                outline: none;
+            }
+
+            .send-mgs-btn {
+                margin: 0px -20px 0px 0px;
+                width: 42%;
+                height: 37px;
+                color: #fff;
+                background-color: #32beffdc;
+                border: 1px solid #32beffdc;
+                border-radius: 0px;
+                outline: none !important;
+                transition: 250ms;
+                font-weight: 400;
+            }
+
+            .send-mgs-btn:hover {
+                background-color: transparent;
+                color: #32beffdc;
+
+            }
+
+            .send-mgs-btn:active {
+                color: #15739edc;
+            }
+
+
+            .back-to-back a,
+            span {
+                color: #fff;
+                margin-left: 10px;
+                transition: 700ms;
+                text-decoration: none;
+            }
+
+            .back-to-back a:hover {
+                color: #32beffdc;
+            }
+        </style>
+
+
+
+        <div class="banner">
+
+            <div class=" banner-overlay">
+                <div class="container">
+
+                    <h1 style="padding: 190px 50px 5px 10px; color: #fff">
+                        Health Tips
+                    </h1>
+
+                    <div class="back-to-back">
+                        <a href="#">Health </a>
+                        <span class="fa fa-arrow-right"></span>
+                        <a href="#">Home </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div style="min-height:500px; padding: 50px 0px 10px 0px; background: #fff;">
+
+
+        <div class="container">
+
+            <h1 style=" font-weight: 700;text-align: center; padding: 0px 0px 0px 20px;
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+                Tips for Your Better Health
+            </h1>
+            <hr style="margin-bottom:30px; margin-top:0px; width: 100px; height:1px;
+            border-top: 1.5px solid #32beffdc; border-radius: 50px;">
+
+            <div class="row" >
+
+                <div class="col-lg-8">
+                    <div class="post-holder">
+
+                        <div class="row" th:each="healthPost, loop : ${healthPostList}">
+                            <div class="col-md-3">
+                                <ul class="post-meta list">
+                                    <li>
+                                        <span style="color: #333;" th:text="${healthPost.poster}"></span>
+                                        <i class="fa fa-user"></i>
+                                    </li>
+                                    <li>
+                                        <span style="color: #333;" th:text="${healthPost.date}"></span>
+                                        <i class="fa fa-calendar"></i>
+
+                                    </li>
+                                    <li>
+                                        <span style="color: #333;" th:text="${healthPost.views} + ' Views'"></span>
+                                        <i class="fa fa-eye"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="blog_post">
+                                    <div style="width:auto; height:auto; overflow-x: hidden; overflow-y: hidden">
+                                        <img style="width: 100%;" th:src="${healthPost.image}" alt="">
+                                    </div>
+
+                                    <div class="post-details">
+                                        <h4 th:text="${healthPost.title}"></h4>
+                                        <p th:text="${healthPost.body}"></p>
+                                        <form th:action="@{read-more}" method="post">
+                                            <input type="hidden" name="id" th:value="${healthPost.id}">
+                                            <input class="post-like-btn" type="submit" value="Read More...">
+                                        </form>
+                                        <!--<a class="post-like-btn" th:href="@{read-more/__${healthPost.id}__}">-->
+                                            <!--Read More...-->
+                                        <!--</a>-->
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div style="width:100%; padding: 0px 15px; justify-content: flex-end;" class="d-flex">
+
+                            <ul class="pagination" style="float: right;">
+
+
+                                <li th:classappend="${selectedPos-1<1?'disabled':''}"  class="page-item">
+                                    <a class="page-link" aria-label="Previous" th:href="@{health(fp=${fp}, pos=${selectedPos}-1, lp=${lp})}">
+                                        <span style="color: #3FACE4;" aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+
+
+                                <th:block th:each="i: ${#numbers.sequence(fp, lp, 1)}">
+
+                                    <!-- Main  -->
+                                    <li th:classappend="${i==selectedPos}?'active':''" class="page-item" >
+                                        <a class="page-link" th:text="${i}" th:href="@{health(fp=${fp}, pos=${i}, lp=${lp})}"></a>
+                                    </li>
+
+                                </th:block>
+
+
+                                <li th:classappend="${(selectedPos+1)>pageCount?'disabled':''}" class="page-item">
+                                    <a class="page-link" aria-label="Next" th:href="@{health(fp=${fp}, pos=${selectedPos}+1, lp=${lp})}">
+                                        <span style="color: #3FACE4;" aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="col-lg-4">
+
+                    <div class="book-post-container">
+
+                        <div th:each="loadHealthTipsBook: ${healthTipsBookList}" class="book-holder">
+
+                            <img style="width: 100%; height: auto; "
+                                 th:src="${loadHealthTipsBook.image}">
+
+                            <div style=" margin: 10px 0px; padding: 3px 7px 0px 7px; ;border-left:2px solid #3FACE4 ;">
+                                <p style="font-size: 13px; text-align: left" ><span style="color:#333;text-align: left" th:text="${loadHealthTipsBook.description}"/>
+                                    <a th:href="${loadHealthTipsBook.link}" target="_blank">
+                                        <i class="fa fa-link" aria-hidden="true"></i>
+                                        <span style="color: #3face4;">Collect from here</span>
+                                    </a>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!--footer part-->
+
+    <footer class="footer-area">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-3  col-md-4 f-col">
+
+                    <h5 class="f-title">Developers</h5>
+                    <ul class="dev-name">
+                        <li>
+                            <a th:href="${devLink_1}" target="_blank">
+                                <i class="fa fa-laptop" aria-hidden="true"></i>
+                                <!--<span style="color: #777777" th:text="${devName_1}"/> -->
+                                [[${devName_1}]]
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${devLink_2}" target="_blank">
+                                <i class="fa fa-laptop" aria-hidden="true"></i>
+                                <!--<span style="color: #777777" th:text="${devName_2}"/> -->
+                                [[${devName_2}]]
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${devLink_3}" target="_blank"> <i class="fa fa-laptop"
+                                    aria-hidden="true"></i>
+                                <!--<span style="color: #777777" th:text="${devName_3}"/>-->
+                                [[${devName_3}]]
+                                </a>
+                        </li>
+                        <li>
+                            <a th:href="${devLink_4}" target="_blank"> <i
+                                    class="fa fa-laptop" aria-hidden="true"></i>
+                                <!--<span style="color: #777777" th:text="${devName_4}"/>-->
+                                [[${devName_4}]]
+                                </a>
+                        </li>
+                    </ul>
+                    <div class="dev-social">
+                        <a th:href="${mcubesFbLink}" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a th:href="${mcubesTwitterLink}" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a th:href="${mcubesLinkedInLink}" target="_blank">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4  col-md-4 f-col">
+
+                    <h5 class="f-title">Contact Us</h5>
+
+                    <p style="color: #777777; font-size:14px; margin-top: 20px;">
+                        Mawlana Bhashani Science & Technology University. Santosh, Tangail.
+                    </p>
+
+                    <h6 style="color: #fff" th:text="${contactNo1}"/>
+                    <h6 style="color: #fff" th:text="${contactNo2}"/>
+
+                    <a target="_blank" class="web-link" href="https://www.mbstu.ac.bd"><i class="fa fa-globe"
+                            aria-hidden="true"></i>https://www.mbstu.ac.bd</a>
+                </div>
+
+                <div class="col-lg-5  col-md-4 f-col">
+                    <h5 class="f-title">Subscribe</h5>
+                    <div style="margin-top:20px">
+                        <p style="color: #777777; font-size:14px; margin-top: 20px;">
+                            Subscribe to us so that you can get health tips from our expert doctors.
+                        </p>
+                        <div class="subscribe-form">
+                            <input class="subscribe-email"  placeholder="Your Email Address" type="email">
+                            <input class="subscribe-btn" type="submit" onclick="subscribeRequest()" value="Subscribe">
+                        </div>
+                    </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 10px;">
+                <p style="color: #777777; font-size:13px">
+                    Copyright ©2019 All rights reserved by <span style="color: #32beffdc"> mCubeS </span> IT Limited
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+</body>
+
+
+</html>

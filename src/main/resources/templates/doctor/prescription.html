@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Prescription | MBSTU Medical Center</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.png" />
+    <!-- Bootstrap core CSS -->
+    <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <script src="source/jquery/jquery.min.js"></script>
+    <script src="source/bootstrap/js/bootstrap.js"></script>
+    <script src="source/jquery/my_canvas.js"></script>
+
+    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
+    <!-- <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
+
+
+    <style>
+        body {
+            overflow-x: hidden;
+            background: #eeeeee;
+        }
+
+        .my-navbar {
+            background: #fff;
+        }
+
+        .efw {
+            border: 1px solid #ff0000;
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#overlay").show();
+
+            var id = sessionStorage.getItem("key");
+            dremail = sessionStorage.getItem("dr-email");
+            $("#dr-email").text(dremail);
+            //alert(id+" "+email);
+            if(dremail==null){
+                window.open("doctor","_self");
+            }
+
+            $.post("fetch-doctor-info", {email: dremail}, function (data, status) {
+
+                doctor = data;
+                $("#drName").text("Dr. "+doctor["name"]);
+                $("#drDegree").text(doctor["degree"]);
+                $("#drPhone").text("Phone : "+doctor["phone"]);
+
+            });
+
+
+            $.post("fetch-patient-by-id",{id:id}, function (data, status) {
+
+                $("#overlay").hide();
+
+                patient = data;
+
+                pid = patient["pid"];
+                pname = patient["pname"];
+                psex = patient["psex"];
+                pdob = patient["pdob"];
+
+                page = (new Date().getYear()+1900) - (pdob.split("-")[0]);
+
+                $("#pid").text("ID : "+pid);
+                $("#pname").text("Name : "+pname);
+                $("#psex").text("Gender : "+psex);
+                $("#page").text("Age : "+page);
+            });
+
+
+
+            $("#searchMedicine").keyup(function () {
+                var sv = $(this).val().toLowerCase();
+                $("#medicineTblBody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(sv) > -1);
+                });
+            });
+
+
+            $("#medicineTblBody tr").click(function () {
+                $("#medicineName").text($(this).children("td").text() );
+            });
+
+
+            $("#sendMedicineToPrescription").click(function () {
+
+                var txt = $(".text-area").val();
+                var cursorPos = $(".text-area").prop('selectionStart');
+                preText = txt.substring(0, cursorPos);
+                postText = txt.substring(cursorPos, txt.length);
+
+                medicine =  $("#medicineName").text();
+                if(medicine!=''){
+                    $(".text-area").val(preText + medicine +" ("+ $("#morning").val()+" + "+ $("#noon").val() +" + "+$("#night").val() +") "+ postText);
+                }
+            });
+        });
+
+
+
+
+    </script>
+
+
+
+</head>
+
+<body>
+
+
+
+
+<div id="overlay">
+    <!-- <div class="spinner-grow text-muted"></div>
+    <div class="spinner-grow text-primary"></div>
+    <div class="spinner-grow text-success"></div>
+    <div class="spinner-grow text-info"></div>
+    <div class="spinner-grow text-warning"></div>
+    <div class="spinner-grow text-danger"></div>
+    <div class="spinner-grow text-secondary"></div>
+    <div class="spinner-grow text-dark"></div>
+    <div class="spinner-grow text-light"></div> -->
+    <div class="spinner-border text-primary" style="width: 100px; height:100px"></div>
+</div>
+
+
+<div>
+
+    <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top my-navbar">
+
+        <a href="/doctor" class="btn btn-primary" id="menu-toggle">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </a>
+
+        <h6 style="padding: 0 15px;">MBSTU MEDICAL CENTER : : PRESCRIPTION</h6>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" style="padding: 0px 20px;font-size: 13px;"> <img src="images/dr.png"
+                            class="img-circle img-responsive" style="width: 30px">
+                       <span id="dr-email"></span> </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="doctor-logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+    </nav>
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+        function savePrescription() {
+
+            $("#overlay").show();
+
+            $.post("save-prescription", {
+
+                pid: pid,
+                pname: pname,
+                psex: psex,
+                page: page,
+                dremail: dremail,
+                drname: doctor["name"],
+                drdegree: doctor["degree"],
+                drphone: doctor["phone"],
+                pbody:  $(".text-area").val()
+
+            }, function (data, status) {
+                $("#overlay").hide();
+               alert(data);
+            });
+        }
+
+
+        function printDiv() {
+
+            //alert($(".text-area").val());
+            var hrx = $(".text-area").val();
+
+            $("#rx").text(hrx);
+            $("#rx").hide();
+
+            var divToPrint = document.getElementById('prescription-content');
+            var newWin = window.open('', 'Print-Window');
+            newWin.document.open();
+
+            var arr = hrx.split("\n");
+            hrx = "";
+            for (i = 0; i < arr.length; i++) {
+                hrx += arr[i] + "<br/>";
+            }
+            drprescription = "<p style='text-align:left;padding: 0px 100px'>" + hrx + "</p>";
+            newWin.document.write('<html><body onload="window.print()"> <center>' + divToPrint.innerHTML + drprescription + ' </center> </body></html>');
+            newWin.document.close();
+            setTimeout(function () { newWin.close(); }, 1);
+        }
+
+
+        /*
+        function testBtn() {
+            try {
+                var txt = $(".text-area").val();
+                var cursorPos = $(".text-area").prop('selectionStart');
+                preText = txt.substring(0, cursorPos);
+                postText = txt.substring(cursorPos, txt.length);
+                alert(preText + " Text Here " + postText);
+                // alert(txt);
+                $(".text-area").val(preText + " Text Here " + postText);
+
+            } catch (e) {
+                alert(e);
+            }
+
+        }
+        */
+
+
+
+        function clearPrescription() {
+            $(".text-area").val('');
+        }
+
+
+    </script>
+
+
+
+    <!-- Page Content -->
+    <div class="container" style="padding-top: 100px">
+
+
+
+
+        <div class="row">
+
+            <div class="col-sm-6 col-md-4 col-xs-6" style="padding: 10px">
+
+                <div class=" my-card" style="padding: 10px;  ">
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                        </div>
+                        <input id="searchMedicine" class="form-control" type="text" placeholder="search medicine">
+                    </div>
+
+                    <div style="margin-top: 7px; overflow-y: scroll; height: 225px">
+
+                        <table class="table table-hover">
+
+                            <tbody id="medicineTblBody">
+                                <tr>
+                                    <td>Napa</td>
+                                </tr>
+                                <tr>
+                                    <td>Tofen</td>
+                                </tr>
+                                <tr>
+                                    <td>Paracitamol</td>
+                                </tr>
+                                <tr>
+                                    <td>Napa</td>
+                                </tr>
+                                <tr>
+                                    <td>Tofen</td>
+                                </tr>
+                                <tr>
+                                    <td>Paracitamol</td>
+                                </tr>
+                                <tr>
+                                    <td>Napa</td>
+                                </tr>
+                                <tr>
+                                    <td>Tofen</td>
+                                </tr>
+                                <tr>
+                                    <td>Paracitamol</td>
+                                </tr>
+                                <tr>
+                                    <td>Napa</td>
+                                </tr>
+                                <tr>
+                                    <td>Tofen</td>
+                                </tr>
+                                <tr>
+                                    <td>Paracitamol</td>
+                                </tr>
+                                <tr>
+                                    <td>Napa</td>
+                                </tr>
+                                <tr>
+                                    <td>Tofen</td>
+                                </tr>
+                                <tr>
+                                    <td>Paracitamol</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class=" my-card" style="padding: 10px; margin-top: 20px;">
+                    <div class="d-flex">
+                        <h6> Medicine :</h6>
+                        <h6 id="medicineName" style="padding: 0px 5px;"></h6>
+                    </div>
+
+                    <div class="d-flex">
+                        <select id="morning" class="form-control">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                        </select>
+                        <h3> + </h3>
+                        <select id="noon" class="form-control">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                        </select>
+                        <h3> + </h3>
+                        <select id="night" class="form-control">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                        </select>
+                        <button style="margin-left: 10px; height: 38px;" id="sendMedicineToPrescription" class="btn btn-primary">Done</button>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class=" my-card" style="padding: 10px; margin-top: 20px;">
+                    <h5> Prescription Option </h5>
+                    <div style="justify-items: space-between">
+                        <button style="width: 30%" class="btn btn-success" onclick="savePrescription()">Save</button>
+                        <button style="width: 30%; margin: 0 3%" class="btn btn-primary"
+                            onclick="printDiv()">Print</button>
+                        <button style="width: 30%" class="btn btn-danger" onclick="clearPrescription()">Clear</button>
+                        <!-- <button class="btn btn-primary" onclick="testBtn()">Test</button> -->
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="col-sm-6 col-md-8 col-xs-6" style="padding: 10px">
+
+                <div class=" my-card" style="padding: 10px">
+
+                    <div id="prescription-content">
+
+                        <div style="padding: 50px 100px; text-align: center">
+
+                            <style>
+                                .medi-info {
+                                    font-size: 11px;
+                                    padding: 0px;
+                                    margin: 2px 0px;
+                                }
+
+                                .text-area:focus {
+                                    border: none !important;
+                                    outline: 0;
+                                }
+                            </style>
+
+                            <h4>Mawlana Bhashani Science and Technology University, Santosh, Tangail-1902</h4>
+
+
+                            <div style="display: flex; ">
+
+                                <div style="width: 33.33%; text-align: left;">
+                                    <p class="medi-info"> <b>Medical Center</b></p>
+                                    <p class="medi-info">Santosh, Tangail-1902</p>
+                                    <p class="medi-info">Phone : 0921-55339, 62404</p>
+                                    <p class="medi-info">Tele Fx : 0921-55400</p>
+                                </div>
+
+                                <div style="width: 33.33%;  text-align: center;">
+                                    <div style=" text-align: left; padding-left: 30px">
+                                        <p class="medi-info"><b>Prescribed By</b></p>
+                                        <p id="drName" class="medi-info">Name : </p>
+                                        <p id="drDegree" class="medi-info"> Degree : </p>
+                                        <p id="drPhone" class="medi-info">Phone : </p>
+                                    </div>
+                                </div>
+
+
+                                <div style="width: 33.33%; text-align: right;">
+                                    <img src="images/icon.png" width="70px" class="img img-responsive" />
+                                </div>
+
+                            </div>
+
+
+                            <hr style="margin: 10px 0px 3px 0px" />
+                            <div style="text-align: center">
+                                <p style="padding: 0px; margin:0px; font-size: 11px;"> <strong>POWERED BY ICT,
+                                        MBSTU</strong> </p>
+                            </div>
+                            <hr style="margin: 3px 0px 10px 0px" />
+
+                            <div style="display: flex; font-size: 20px">
+                                <p id="pid" class="medi-info" style="width: 33.33%; text-align: left; font-size: 13px"> ID : </p>
+                                <p id="pname" class="medi-info" style="width: 33.33%;  text-align: left; font-size: 13px"> Name : </p>
+                                <p id="psex" class="medi-info" style="width: 33.33%; text-align: right; font-size: 13px"> Gender : </p>
+                                <p id="page" class="medi-info" style="width: 33.33%; text-align: right; font-size: 13px"> Age : </p>
+                            </div>
+
+
+                        </div>
+                        <h4 style=" text-align: left; margin:5px 0px;padding: 0px 100px; margin-top:-20px;">Rx</h4>
+                    </div>
+
+
+                    <div style="padding: 0px 100px; ">
+
+                        <textarea class="text-area" type="text"
+                            style="font-size:13px; margin:5px 0px;background: #fff;color:#000; width:100%; min-height:600px; border:none; "
+                            placeholder="Write from here..."></textarea>
+                        <p id="rx"></p>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+</body>
+
+</html>

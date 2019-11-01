@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My Profile | MBSTU Medical Center</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.png" />
+    <!-- Bootstrap core CSS -->
+    <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+    <link href="user-side-style.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <script src="source/jquery/jquery.min.js"></script>
+    <script src="source/bootstrap/js/bootstrap.js"></script>
+    <script src="source/jquery/my_canvas.js"></script>
+    <script src="user_profile.js"></script>
+
+    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
+    <!-- <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
+
+
+    <style>
+        .efw{
+            background: rgba(245, 0, 12, 0.03);
+        }
+        .boldFont {
+            font-weight: 700;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+
+<div id="overlay">
+    <!-- <div class="spinner-grow text-muted"></div>
+    <div class="spinner-grow text-primary"></div>
+    <div class="spinner-grow text-success"></div>
+    <div class="spinner-grow text-info"></div>
+    <div class="spinner-grow text-warning"></div>
+    <div class="spinner-grow text-danger"></div>
+    <div class="spinner-grow text-secondary"></div>
+    <div class="spinner-grow text-dark"></div>
+    <div class="spinner-grow text-light"></div> -->
+    <div class="spinner-border text-primary" style="width: 100px; height:100px"></div>
+</div>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top my-navbar">
+        <!-- <div class="container"> -->
+        <img style="width: 35px; height:35px; margin: 10px;" class="img img-responsive" src="images/icon.png" />
+
+        <p style="
+            font-family:'Times New Roman', Times, serif;
+            padding: 0 15px; font-weight: 700; font-size: 18px; margin-top: 15px;">MBSTU MEDICAL CENTER</p>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="option">
+                    <a href="home.html"> <i class="fa fa-home" aria-hidden="true"></i> HOME </a>
+                </li>
+                <li class="option">
+                    <a href="#"> <i class="fa fa-h-square" aria-hidden="true"></i> HEALTH </a>
+                </li>
+                <li class="option">
+                    <a href="#"> <i class="fa fa-medkit" aria-hidden="true"></i> MEDICINE </a>
+                </li>
+                <!-- <li class="option">
+                    <a href="#"> <i class="fa fa-info" aria-hidden="true"></i> ABOUT </a>
+                </li>
+                <li class="option">
+                    <a href="#"> <i class="fa fa-user-md" aria-hidden="true"></i> DOCTORS </a>
+                </li> -->
+                <li class="option">
+                    <a href="contact"> <i class="fa fa-volume-control-phone" aria-hidden="true"></i> CONTACT </a>
+                </li>
+                <li class="option active-option">
+                    <a href="login-page"> <i class="fa fa-sign-out" aria-hidden="true"></i> LOGOUT </a>
+                </li>
+                <!-- <li class="nav-item active2 ">
+                      <a class="nav-link2 logout-btn" href="#"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a>
+                    </li> -->
+
+            </ul>
+        </div>
+
+        <!-- </div> -->
+
+    </nav>
+
+
+
+
+
+<!-- Message display modal --->
+<div class="modal fade" id="messageDisplayModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Message</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="mgsDate"></p>
+                <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="mgsSender"></p>
+                <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="mgsSubject"></p>
+                <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="messageBody"></p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Display Prescription with modal -->
+<div class="modal fade" id="prescriptionModal">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <!-- class="col-sm-6 col-md-8 col-xs-6" -->
+
+                <div style="padding: 10px">
+
+                    <div class=" my-card2" style="padding: 10px">
+                        <div id="prescription-content">
+                            <div style="padding: 50px 100px; text-align: center">
+                                <style>
+                                    .medi-info {
+                                        font-size: 11px;
+                                        padding: 0px;
+                                        margin: 2px 0px;
+                                    }
+
+                                    .text-area:focus {
+                                        border: none !important;
+                                        outline: 0;
+                                    }
+                                </style>
+
+                                <h4>Mawlana Bhashani Science and Technology University, Santosh, Tangail-1902</h4>
+
+                                <div style="display: flex; ">
+                                    <div style="width: 33.33%; text-align: left;">
+                                        <p class="medi-info"> <b>Medical Center</b></p>
+                                        <p class="medi-info">Santosh, Tangail-1902</p>
+                                        <p class="medi-info">Phone : 0921-55339, 62404</p>
+                                        <p class="medi-info">Tele Fx : 0921-55400</p>
+                                    </div>
+                                    <div style="width: 33.33%;  text-align: center;">
+                                        <div style=" text-align: left; padding-left: 30px">
+                                            <p class="medi-info"><b>Prescribed By</b></p>
+                                            <p id="presDoctor" class="medi-info">Dr. Kabir Ali, kabir</p>
+                                            <p id="presDoctorDegree" class="medi-info">MBBS, DMC</p>
+                                            <p id="presDoctorPhone" class="medi-info">Phone : 0167863423</p>
+                                        </div>
+                                    </div>
+                                    <div style="width: 33.33%; text-align: right;">
+                                        <img src="images/icon.png" width="70px" class="img img-responsive" />
+                                    </div>
+                                </div>
+                                <hr style="margin: 10px 0px 3px 0px" />
+                                <div style="text-align: center">
+                                    <p style="padding: 0px; margin:0px; font-size: 11px;"> <strong>POWERED BY ICT,
+                                        MBSTU</strong> </p>
+                                </div>
+                                <hr style="margin: 3px 0px 10px 0px" />
+                                <div style="display: flex; ">
+                                    <p id="presPatientId" class=" medi-info" style="width: 33.33%; text-align: left; font-size: 13px"></p>
+                                    <p id="presPatientName" class="medi-info" style="width: 33.33%;  text-align: left; font-size: 13px"></p>
+                                    <p id="presPatientSex" class="medi-info" style="width: 33.33%; text-align: right; font-size: 13px"></p>
+                                    <p id="presPatientAge" class="medi-info" style="width: 33.33%; text-align: right; font-size: 13px"></p>
+                                </div>
+                            </div>
+                            <h4 style=" text-align: left; margin:5px 0px;padding: 0px 100px; margin-top:-20px;">Rx
+                            </h4>
+                        </div>
+
+                        <div style="padding: 0px 100px; ">
+                                <textarea id="prescriptionBody" readonly class="text-area" type="text"
+                                          style="font-size:13px; margin:5px 0px;background: #fff;color:#000; width:100%; min-height:600px; border:none; "
+                                          placeholder="Write from here..."></textarea>
+                            <p id="rx"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+
+
+        <style>
+            .login-btn {
+                margin-top: 32px;
+                width: 48%;
+                height: 37px;
+                color: #fff;
+                background-color: #32beffdc;
+                border: 1px solid #32beffdc;
+                border-radius: 5px;
+                outline: none !important;
+                transition: 250ms;
+                font-weight: 600;
+            }
+
+            .login-btn:hover {
+                background-color: #1182b6dc;
+                color: rgb(230, 230, 230);
+            }
+
+            .main-div {
+                padding: 120px 0px 100px 0px;
+                background: #F9F9FF;
+                height: auto;
+            }
+
+            .user-info {
+                margin: 20px 0px;
+                padding: 10px 10px 50px 10px;
+                box-shadow: 1px 3px 5px #ddd;
+                border-radius: 5px;
+                background: #fff;
+                text-align: center;
+                border-top: 2px solid #32beffdc;
+                border-bottom: 2px solid #32beffdc;
+            }
+
+            .user-info img {
+                margin-top: 40px;
+                padding: 10px;
+                width: 100px;
+                height: 100px;
+                background-color: rgb(237, 237, 246);
+                border-radius: 100%;
+            }
+
+            .active-point {
+                width: 10px;
+                height: 10px;
+                background: #04b804;
+                text-align: center;
+                border-radius: 100%;
+
+            }
+
+            .user-info h6 {
+                margin: 0px;
+                padding: 20px 25px 5px 25px;
+                font-weight: 600;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+            }
+
+            .user-info p {
+                padding: 5px 20px;
+                font-size: 13px;
+            }
+
+            .user-info table td {
+                text-align: left;
+                font-size: 13px;
+            }
+
+            .t-history {
+                margin: 20px 0px;
+                padding: 10px 20px 20px 10px;
+                box-shadow: 1px 3px 5px #ddd;
+                border-radius: 5px;
+                background: #fff;
+                border-top: 2px solid #32beffdc;
+                border-bottom: 2px solid #32beffdc;
+            }
+        </style>
+
+
+
+
+        <div class="main-div">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+
+                        <div class="user-info">
+
+
+                            <img src="images/user.png" />
+                            <h6 id="pname" th:text="${patient.pname}"></h6>
+                            <p>Your basic information by your prescribed doctor.</p>
+
+                            <table class="table">
+                                <tr>
+                                    <td>ID </td>
+                                    <td id="patientId" th:text="${patient.pid}"></td>
+                                </tr>
+                                <tr>
+                                    <td>DOB </td>
+                                    <td th:text="${patient.pdob}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Gender </td>
+                                    <td th:text="${patient.psex}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Fater </td>
+                                    <td th:text="${patient.pfather}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Mother </td>
+                                    <td th:text="${patient.pmother}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Address </td>
+                                    <td th:text="${patient.paddress}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Type </td>
+                                    <td th:text="${patient.ptype}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Department </td>
+                                    <td th:text="${patient.pdept}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Blood Group </td>
+                                    <td th:text="${patient.pblood}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Weight (KG) </td>
+                                    <td th:text="${patient.pweight}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Height (Feet) </td>
+                                    <td th:text="${patient.pheight}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Contact</td>
+                                    <td th:text="${patient.pcontact}"></td>
+                                </tr>
+                                <tr>
+                                    <td>Marital status</td>
+                                    <td th:text="${patient.pmaritalstatus}"></td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-8">
+
+
+                        <div class="t-history">
+
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <h5 style="margin :0px; padding: 0px 0px 0px 20px;">
+                                        Prescription
+                                        Request & Feedback</h5>
+                                </div>
+                                <div class="col-sm-1">
+                                    <i style="color: #32beffdc" class="fa fa-envelope-o" aria-hidden="true"></i>
+                                </div>
+
+                            </div>
+
+                            <hr />
+
+                            <style>
+                                .input-box {
+                                    margin: 7px 3px;
+                                    padding: 5px 10px;
+                                    border: 1px solid #ddd;
+                                    width: 100%;
+                                    font-size: 13px;
+                                    outline: none;
+                                }
+
+                                .send-mgs-btn {
+                                    margin: 0px -20px 0px 0px;
+                                    width: 42%;
+                                    height: 35px;
+                                    color: #fff;
+                                    background-color: #32beffdc;
+                                    border: 1px solid #32beffdc;
+                                    border-radius: 0px;
+                                    outline: none !important;
+                                    transition: 250ms;
+                                    font-weight: 400;
+                                }
+
+                                .send-mgs-btn:hover {
+                                    background-color: transparent;
+                                    color: #32beffdc;
+
+                                }
+
+                                .send-mgs-btn:active {
+                                    color: #15739edc;
+                                }
+
+
+                                .mgs-tbl-holder {
+                                    margin-top: 20px;
+                                    height: 262px;
+                                    overflow-y: scroll;
+                                }
+
+                                .mgs-tbl {
+                                    width: 100%;
+                                    font-size: 12px;
+                                }
+
+                                .mgs-tbl tbody tr td {
+                                    max-width: 260px;
+                                    color: #525252;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    cursor: pointer;
+                                }
+
+
+                                /* .mgs-tbl th {
+                                    text-align: center;
+                                } */
+
+                                /* .mgs-tbl tbody {
+                                    width: 100%;
+                                    display: block;
+                                    max-height: 200px;
+                                    overflow-y: scroll;
+                                } */
+
+                                /* .mgs-tbl tr {
+                                    display: table;
+                                    width: 100%;
+                                    box-sizing: border-box;
+                                } */
+
+
+                                .fa-arrow-right {
+                                    color: #ff0000;
+                                }
+
+                                .fa-arrow-left {
+                                    color: #00ff00;
+                                }
+                            </style>
+
+
+                            <div class="row">
+
+                                <div class="col-md-6 ">
+                                    <select id="selectedDoctor" class="input-box" type="text" placeholder="Enter your name">
+                                        <option th:each="dr:${drList}" th:id="${dr.email}" th:text="${dr.name}"></option>
+                                    </select>
+                                    <input id="subject" class="input-box" type="text" placeholder="Enter Subject">
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <textarea id="message" style="height: 75px; resize: none; outline: none " class="input-box"
+                                        type="text" rows="1" placeholder="Enter Message..."></textarea>
+                                    <div class="col-md-12 text-right">
+                                        <button onclick="sendMessage()" type="submit" value="submit" class="send-mgs-btn">Send Message</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="mgs-tbl-holder table-hover">
+
+                                <table class="table mgs-tbl ">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Income/Outgoing</th>
+                                            <th>Doctor</th>
+                                            <th>Message</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="messageTblBody">
+
+
+                                    <!--
+
+                                        <tr onclick="viewMessage(3)">
+                                            <td>02-10-2019</td>
+                                            <td style="text-align: center"> <i class="fa fa-arrow-right"
+                                                    aria-hidden="true"></i> </td>
+                                            <td>Dr. Hamidur Rahman</td>
+                                            <td>Hi, i have some problem, please help me.</td>
+
+                                            <td>unseen</td>
+                                        </tr>
+
+                                        <tr onclick="viewMessage(103)">
+                                            <td>02-10-2019</td>
+                                            <td style="text-align: center"> <i class="fa fa-arrow-left"
+                                                    aria-hidden="true"></i> </td>
+                                            <td>Dr. Hamidur Rahman</td>
+                                            <td>Hi, .</td>
+                                            <td>seen</td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>02-10-2019</td>
+                                            <td style="text-align: center"> <i class="fa fa-arrow-right"
+                                                    aria-hidden="true"></i> </td>
+                                            <td>Dr. Hamidur Rahman</td>
+                                            <td>Hi, i have some problem, please help me.</td>
+                                            <td>seen</td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td>02-10-2019</td>
+                                            <td style="text-align: center"> <i class="fa fa-arrow-left"
+                                                    aria-hidden="true"></i> </td>
+                                            <td>Dr. Hamidur Rahman</td>
+                                            <td>Hi, .</td>
+                                            <td>unseen</td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td>02-10-2019</td>
+                                            <td style="text-align: center"> <i class="fa fa-arrow-left"
+                                                    aria-hidden="true"></i> </td>
+                                            <td>Dr. Hamidur Rahman</td>
+                                            <td>Hi, .</td>
+
+                                            <td>seen</td>
+                                        </tr>
+-->
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+
+
+
+
+                        <div class="t-history">
+
+
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <h5 style="margin :0px; padding: 0px 0px 0px 20px;">
+                                        Treatment History
+                                    </h5>
+                                </div>
+                                <div class="col-sm-1">
+                                    <i style="color: #32beffdc" class="fa fa-bar-chart" aria-hidden="true"></i>
+                                </div>
+
+                            </div>
+
+                            <hr />
+
+
+
+                            <div class="mgs-tbl-holder">
+
+                                <table class="table mgs-tbl table-hover ">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Doctor</th>
+                                            <th>View</th>
+                                            <th>Print</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="prescriptionListTblBody">
+
+                                    <!--
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>06-10-2019</td>
+                                            <td>Dr. Sikandar Khan</td>
+                                            <td>
+                                                <i style="color: #10afd6; font-size:16px" class="fa fa-eye"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <i style="color: #e60a0a; font-size:16px" class="fa fa-print"
+                                                    aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        -->
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+
+
+
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--footer part-->
+
+<footer class="footer-area">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3  col-md-4 f-col">
+
+                <h5 class="f-title">Developers</h5>
+                <ul class="dev-name">
+                    <li>
+                        <a th:href="${devLink_1}" target="_blank">
+                            <i class="fa fa-laptop" aria-hidden="true"></i>
+                            [[${devName_1}]]
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="${devLink_2}" target="_blank">
+                            <i class="fa fa-laptop" aria-hidden="true"></i>
+                            [[${devName_2}]]
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="${devLink_3}" target="_blank"> <i class="fa fa-laptop"
+                                                                      aria-hidden="true"></i>
+                            [[${devName_3}]]
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="${devLink_4}" target="_blank"> <i
+                                class="fa fa-laptop" aria-hidden="true"></i>
+                            [[${devName_4}]]
+                        </a>
+                    </li>
+                </ul>
+                <div class="dev-social">
+                    <a th:href="${mcubesFbLink}" target="_blank">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a th:href="${mcubesTwitterLink}" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a th:href="${mcubesLinkedInLink}" target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4  col-md-4 f-col">
+
+                <h5 class="f-title">Contact Us</h5>
+
+                <p style="color: #777777; font-size:14px; margin-top: 20px;">
+                    Mawlana Bhashani Science & Technology University. Santosh, Tangail.
+                </p>
+
+                <h6 style="color: #fff" th:text="${contactNo1}"/>
+                <h6 style="color: #fff" th:text="${contactNo2}"/>
+
+                <a target="_blank" class="web-link" href="https://www.mbstu.ac.bd"><i class="fa fa-globe"
+                                                                                      aria-hidden="true"></i>https://www.mbstu.ac.bd</a>
+            </div>
+
+            <div class="col-lg-5  col-md-4 f-col">
+                <h5 class="f-title">Subscribe</h5>
+                <div style="margin-top:20px">
+                    <p style="color: #777777; font-size:14px; margin-top: 20px;">
+                        Subscribe to us so that you can get health tips from our expert doctors.
+                    </p>
+                    <div class="subscribe-form">
+                        <input class="subscribe-email"  placeholder="Your Email Address" type="email">
+                        <input class="subscribe-btn" type="submit" onclick="subscribeRequest()" value="Subscribe">
+                    </div>
+                </div>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <p style="color: #777777; font-size:13px">
+                Copyright ©2019 All rights reserved by <span style="color: #32beffdc"> mCubeS </span> IT Limited
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+
+
+</body>
+
+
+</html>

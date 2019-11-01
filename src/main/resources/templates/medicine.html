@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Medicine | MBSTU Medical Center</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.png" />
+    <!-- Bootstrap core CSS -->
+    <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+    <link href="user-side-style.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <script src="source/jquery/jquery.min.js"></script>
+    <script src="source/bootstrap/js/bootstrap.js"></script>
+    <script src="source/jquery/my_canvas.js"></script>
+
+    <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
+    <!-- <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
+
+    <style>
+
+
+
+    </style>
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+    <div id="overlay" style="display: none;">
+        <!-- <div class="spinner-grow text-muted"></div>
+                                    <div class="spinner-grow text-primary"></div>
+                                    <div class="spinner-grow text-success"></div>
+                                    <div class="spinner-grow text-info"></div>
+                                    <div class="spinner-grow text-warning"></div> gmail@gmail.com
+                                    <div class="spinner-grow text-danger"></div>
+                                    <div class="spinner-grow text-secondary"></div>
+                                    <div class="spinner-grow text-dark"></div>
+                                    <div class="spinner-grow text-light"></div> -->
+        <div class="spinner-border text-primary" style="z-index:27; width: 100px; height:100px"></div>
+    </div>
+
+
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top my-navbar">
+        <!-- <div class="container"> -->
+        <img style="width: 35px; height:35px; margin: 10px;" class="img img-responsive" src="images/icon.png" />
+
+        <p style="
+            font-family:'Times New Roman', Times, serif;
+            padding: 0 15px; font-weight: 700; font-size: 18px; margin-top: 15px;">MBSTU MEDICAL CENTER</p>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="option">
+                    <a href="/"> <i class="fa fa-home" aria-hidden="true"></i> HOME </a>
+                </li>
+                <li class="option ">
+                    <a href="health"> <i class="fa fa-h-square" aria-hidden="true"></i> HEALTH </a>
+                </li>
+                <li class="option active-option">
+                    <a href="medicine"> <i class="fa fa-medkit" aria-hidden="true"></i> MEDICINE </a>
+                </li>
+                <!-- <li class="option">
+                    <a href="#"> <i class="fa fa-info" aria-hidden="true"></i> ABOUT </a>
+                </li>
+                <li class="option">
+                    <a href="#"> <i class="fa fa-user-md" aria-hidden="true"></i> DOCTORS </a>
+                </li> -->
+                <li class="option">
+                    <a href="contact"> <i class="fa fa-volume-control-phone" aria-hidden="true"></i> CONTACT </a>
+                </li>
+                <li class="option ">
+                    <a href="login-page"> <i class="fa fa-user" aria-hidden="true"></i> MY PROFILE </a>
+                </li>
+                <!-- <li class="nav-item active2 ">
+                      <a class="nav-link2 logout-btn" href="#"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a>
+                    </li> -->
+
+            </ul>
+        </div>
+
+        <!-- </div> -->
+
+
+    </nav>
+
+
+
+
+
+    <div>
+
+
+
+        <style>
+            .banner {
+                background: url("images/banner-bg.jpg") no-repeat center bottom;
+                position: relative;
+                z-index: 0;
+                height: 400px;
+            }
+
+            .banner-overlay {
+                height: 100%;
+                background: rgba(0, 0, 0, 0.534);
+                z-index: 0;
+            }
+
+
+            .input-box {
+                margin: 7px 3px;
+                padding: 7px 10px;
+                border: 1px solid #ddd;
+                width: 100%;
+                font-size: 14px;
+                outline: none;
+            }
+
+            .send-mgs-btn {
+                margin: 0px -20px 0px 0px;
+                width: 42%;
+                height: 37px;
+                color: #fff;
+                background-color: #32beffdc;
+                border: 1px solid #32beffdc;
+                border-radius: 0px;
+                outline: none !important;
+                transition: 250ms;
+                font-weight: 400;
+            }
+
+            .send-mgs-btn:hover {
+                background-color: transparent;
+                color: #32beffdc;
+
+            }
+
+            .send-mgs-btn:active {
+                color: #15739edc;
+            }
+
+
+            .back-to-back a,
+            span {
+                color: #fff;
+                margin-left: 10px;
+                transition: 700ms;
+                text-decoration: none;
+            }
+
+            .back-to-back a:hover {
+                color: #32beffdc;
+            }
+        </style>
+
+
+
+        <div class="banner">
+
+            <div class=" banner-overlay">
+                <div class="container">
+
+                    <h1 style="padding: 190px 50px 5px 10px; color: #fff">
+                        Medicine
+                    </h1>
+
+                    <div class="back-to-back">
+                        <a href="#">Medicine </a>
+                        <span class="fa fa-arrow-right"></span>
+                        <a href="#">Home </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <style>
+        .abc-holder {
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            padding: 13% 0;
+            margin: 5px 3px;
+            background: #f9f9ff;
+            border: 1px solid #3face4;
+            border-radius: 10%;
+            cursor: pointer;
+            color: #3face4;
+        }
+
+        .abc-active {
+            background: #3face4;
+            border: 1px solid #3face4;
+            color: #fff;
+        }
+    </style>
+
+    <script>
+
+        function fetchMedicine(abc_opt) {
+            $("#overlay").show();
+            $.post("fetch-medicine",{opt:abc_opt}, function (data, status) {
+                $("#overlay").hide();
+
+                medi_block="";
+                for(i=0;i<data.length;i++){
+                    medi_details = data[i];
+                    //medi_block+=Object.values(medi_details);
+                    medi_block+='<div class="col-lg-4 col-md-6 ">';
+                    medi_block+='<div class="medicine-holder">';
+                    medi_block+='<p class="medi-name">';
+                    medi_block+=medi_details["name"]+' <span class="medi-category">'+medi_details["category"]+'</span>';
+                    medi_block+='</p>';
+                    medi_block+='<p class="medi-details1">'+medi_details["percentage"]+'</p>';
+                    medi_block+='<p class="medi-details2">'+medi_details["element"]+'</p>';
+                    medi_block+='<p class="medi-details3">'+medi_details["company"]+'</p>';
+                    medi_block+='<p class="medi-details4">'+medi_details["price"]+'</p>';
+                    medi_block+='</div>';
+                    medi_block+='</div>';
+                }
+
+                $(".medi-filter").empty();
+                $(".medi-filter").append(medi_block);
+
+            });
+        }
+
+        fetchMedicine("A");
+
+
+        function selectSearchOption(ctx) {
+            $('.abc-holder').removeClass('abc-active');
+            $(ctx).addClass('abc-active');
+            opt = $('.abc-active h6').text();
+            fetchMedicine(opt);
+            //alert(opt);
+        }
+
+        $(document).ready(function () {
+
+            $("#searchMedicine").keyup(function () {
+                sv = $(this).val().toLowerCase();
+                $(".medi-filter div").filter(function () {
+                    $(this).toggle($(this).text().toLocaleLowerCase().indexOf(sv) > -1);
+                });
+            });
+        });
+
+
+
+    </script>
+
+
+
+
+    <div style="min-height:500px; padding: 30px 0px;" class="main-div">
+
+
+        <div class="container">
+
+
+            <h1 id="searchMediText" style=" font-weight: 700;;text-align: center; padding: 10px 0px 0px 20px;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">
+                Search Your Medicine
+            </h1>
+
+
+            <div class="row">
+
+
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder abc-active">
+                        <h6>A</h6>
+                    </div>
+                </div>
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>B</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>C</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>D</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>E</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>F</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>G</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>H</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>I</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>J</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>K</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>L</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>M</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>N</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>O</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>P</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>Q</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>R</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>S</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>T</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>U</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>V</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>W</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>X</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>Y</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>Z</h6>
+                    </div>
+                </div>
+
+
+
+                <div class="col-xs-1">
+                    <div onclick='selectSearchOption(this)' class="abc-holder">
+                        <h6>#</h6>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style="padding:20px 0px; justify-content: center;" class="input-group mb-3">
+                <div style="width: 70%; height: 40px; border: 1px solid #3face4; justify-content: space-between;"
+                    class="d-flex">
+
+                    <div style="padding: 7px 10px; background: #3face4; color: #fff;">
+                        <i class="fa fa-search " aria-hidden="true"></i>
+                    </div>
+                    <input id="searchMedicine"
+                        style="outline: none !important; width: 100%; border: none; padding: 0px 7px;" type="text"
+                        placeholder="Search Medicine Using Name, Category, Company, Price...">
+                </div>
+
+            </div>
+
+
+
+            <style>
+                .medicine-holder {
+                    padding: 10px 15px;
+                    margin: 10px 0px;
+                    border-radius: 3px;
+                }
+
+                .medi-name {
+                    padding: 0px;
+                    margin: 0px;
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: #3face4;
+                }
+
+                .medi-category {
+                    font-size: 12px;
+                    color: rgb(90, 90, 90);
+                }
+
+
+                .medi-details1 {
+                    padding: 0px;
+                    margin: 0px;
+                    font-size: 14px;
+
+                }
+
+                .medi-details2 {
+                    padding: 0px;
+                    margin: 0px;
+                    font-size: 14px;
+                    color: #00737edc;
+
+                }
+
+                .medi-details3 {
+                    padding: 0px;
+                    margin: 0px;
+                    font-size: 14px;
+
+                }
+
+                .medi-details4 {
+                    padding: 0px;
+                    margin: 0px;
+                    font-size: 14px;
+                    color: #710bd1dc;
+                }
+
+                .medicine-holder:hover {
+                    background: #3face4;
+                }
+
+                .medicine-holder:hover p {
+                    color: #fff;
+                }
+
+                .medicine-holder:hover .medi-category {
+                    color: #fff;
+                }
+            </style>
+
+
+
+            <div class="row medi-filter"> </div>
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!--footer part-->
+
+    <footer class="footer-area">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-3  col-md-4 f-col">
+
+                    <h5 class="f-title">Developers</h5>
+                    <ul class="dev-name">
+                        <li>
+                            <a th:href="${devLink_1}" target="_blank">
+                                <i class="fa fa-laptop" aria-hidden="true"></i>
+                                [[${devName_1}]]
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${devLink_2}" target="_blank">
+                                <i class="fa fa-laptop" aria-hidden="true"></i>
+                                [[${devName_2}]]
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${devLink_3}" target="_blank"> <i class="fa fa-laptop"
+                                                                          aria-hidden="true"></i>
+                                [[${devName_3}]]
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${devLink_4}" target="_blank"> <i
+                                    class="fa fa-laptop" aria-hidden="true"></i>
+                                [[${devName_4}]]
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="dev-social">
+                        <a th:href="${mcubesFbLink}" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a th:href="${mcubesTwitterLink}" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a th:href="${mcubesLinkedInLink}" target="_blank">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4  col-md-4 f-col">
+
+                    <h5 class="f-title">Contact Us</h5>
+
+                    <p style="color: #777777; font-size:14px; margin-top: 20px;">
+                        Mawlana Bhashani Science & Technology University. Santosh, Tangail.
+                    </p>
+
+                    <h6 style="color: #fff" th:text="${contactNo1}"/>
+                    <h6 style="color: #fff" th:text="${contactNo2}"/>
+
+                    <a target="_blank" class="web-link" href="https://www.mbstu.ac.bd"><i class="fa fa-globe"
+                                                                                          aria-hidden="true"></i>https://www.mbstu.ac.bd</a>
+                </div>
+
+                <div class="col-lg-5  col-md-4 f-col">
+                    <h5 class="f-title">Subscribe</h5>
+                    <div style="margin-top:20px">
+                        <p style="color: #777777; font-size:14px; margin-top: 20px;">
+                            Subscribe to us so that you can get health tips from our expert doctors.
+                        </p>
+                        <div class="subscribe-form">
+                            <input class="subscribe-email"  placeholder="Your Email Address" type="email">
+                            <input class="subscribe-btn" type="submit" onclick="subscribeRequest()" value="Subscribe">
+                        </div>
+                    </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 10px;">
+                <p style="color: #777777; font-size:13px">
+                    Copyright ©2019 All rights reserved by <span style="color: #32beffdc"> mCubeS </span> IT Limited
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+</body>
+
+
+</html>

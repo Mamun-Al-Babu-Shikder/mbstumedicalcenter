@@ -1,0 +1,160 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+body {
+  overflow-x: hidden;
+  background: #eeeeee;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding-top: 250px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.089);
+  z-index: 26;
+}
+
+.navbar {
+  background: #fff;
+  border-bottom: 20px solid #eee;
+  box-shadow: 0px 1px 2px rgb(230, 227, 227);
+}
+
+#wrapper {
+  margin-top: 56px;
+}
+
+#sidebar-wrapper {
+  min-height: 100%;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+  height: 100%;
+  width: 220px;
+  z-index: 1;
+  position: fixed;
+  overflow-x: hidden;
+  transition: 0.5s;
+  background-image: url("images/card-1.jpg");
+  background-size: cover;
+  box-shadow: 3px 0px 10px #1879e0c4;
+}
+
+#sidebar-wrapper-layer {
+  height: 100%;
+  background: #1879e0dc;
+}
+
+i {
+  padding: 0 7px;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#page-content-wrapper {
+  margin-left: 230px;
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0px;
+}
+
+@media (min-width: 300px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -230px;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    margin-left: 0rem;
+  }
+}
+
+.logout-btn {
+  padding: 7px 20px 7px 10px;
+  border-radius: 5px;
+  text-align: center;
+  color: #fd455b;
+  text-decoration: none !important;
+  transition: 200ms;
+}
+
+.logout-btn:hover {
+  background-color: #fd455b;
+  color: #fff;
+  box-shadow: 0px 2px 4px #ff6677;
+  transition: 6sec;
+}
+
+.my-card {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 1px 1px 3px #cfcfcf;
+}
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+.opt-menu-btn {
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.opt-menu-btn:hover {
+  background: #1879e0dc;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.sub_menu {
+  border-radius: 4px;
+  position: absolute;
+  z-index: 2;
+  margin: 0px;
+  display: none;
+  background: #fff;
+  box-shadow: 1px 1px 3px rgb(129, 129, 129);
+}
+
+.sub_menu > ul > li {
+  width: 120px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+.sub_menu > ul > li:hover {
+  background: #1879e0c4;
+  color: #fff;
+}
+
+#patientTbl > tr {
+  cursor: pointer;
+}
+
+.input-group-text {
+  padding: 0px 5px;
+  background: #1879e0dc;
+  color: #fff;
+}

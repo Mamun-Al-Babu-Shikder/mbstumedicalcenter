@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Medical Center, MBSTU</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/icon.png" />
+  <!-- Bootstrap core CSS -->
+  <link href="source/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="style.css" rel="stylesheet">
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+
+  <script src="source/jquery/jquery.min.js"></script>
+  <script src="source/bootstrap/js/bootstrap.js"></script>
+  <script src="source/jquery/my_canvas.js"></script>
+  <script src="doctor_panel.js"></script>
+
+  <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
+  <!-- <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
+
+
+  <style>
+    .efw {
+      border: 1px solid #ff0000;
+    }
+
+    .efw2 {
+      background: rgba(255, 0, 0, 0.04);
+    }
+
+    .boldFont {
+      font-weight: 700;
+    }
+
+    .input-box {
+      margin: 7px 3px;
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      width: 100%;
+      font-size: 13px;
+      outline: none;
+    }
+
+  </style>
+
+
+
+
+
+
+  <script>
+
+   // ABOUT CONTACT US SCRIPT
+    /*
+      function fetchContactMessage() {
+
+          $.post("fetch-contact-message", function (data, status) {
+
+              contactMessageList = data;
+
+              tblRow = "";
+              for(i = 0; i<contactMessageList.length; i++)
+              {
+                  contactMgs = contactMessageList[i];
+                  if(contactMgs["status"]=='unseen')
+                      tblRow+='<tr id="contMgsTr'+i+'" class="boldFont" >';
+                  else
+                      tblRow+='<tr id="contMgsTr'+i+'">';
+                  tblRow+='<td onclick="viewContactMessage('+i+')">'+contactMgs["date"]+'</td>';
+                  tblRow+='<td onclick="viewContactMessage('+i+')">'+contactMgs["name"]+'</td>';
+                  tblRow+='<td onclick="viewContactMessage('+i+')">'+contactMgs["email"]+'</td>';
+                  tblRow+='<td onclick="viewContactMessage('+i+')">'+contactMgs["subject"]+' - ('+contactMgs["message"]+') </td>';
+                  tblRow+='<td> <button style="font-size: 11px;" type="button"  onclick="deleteContactMessage('+i+','+contactMgs["id"]+')" class="btn btn-danger"> <i class="fa fa-trash-o" aria-hidden="true"></i> </button></td>';
+                  tblRow+='</tr>';
+              }
+
+              $("#contactTblBody").empty();
+              $("#contactTblBody").append(tblRow);
+          });
+
+      }
+
+
+
+      function viewContactMessage(i) {
+
+          contactMgs = contactMessageList[i];
+          if(contactMgs["status"]=='unseen'){
+
+              $.post("update-contact-message-status",{id:contactMgs["id"]}, function (data, status) {
+                  if(data){
+                      $("#contMgsTr"+i).removeClass("boldFont");
+                  }
+              });
+          }
+
+          $("#contMgsDate").text("Date : "+contactMgs["date"]);
+          $("#contMgsSender").text("Sender : "+contactMgs["name"]);
+          $("#contMgsEmail").text("Eamil : "+contactMgs["email"]);
+          $("#contMgsSubject").text("Subject : "+contactMgs["subject"]);
+          $("#contMgsBody").text("Message : "+contactMgs["message"]);
+
+          $("#contactMessageDisplayModal").modal('show');
+
+          $("#replyContMessageBtn").click(function () {
+              $("#replyEmailAddress").val("To : "+contactMgs["email"]);
+              $("#sendReplyByEmailModal").modal('show');
+          });
+
+      }
+
+
+      function deleteContactMessage(i,id) {
+
+          $("#overlay").show();
+          $.post("delete-contact-message", {id:id}, function (data, status) {
+              $("#overlay").hide();
+              if(data){
+                  //fetchContactMessage();
+                  $("#contMgsTr"+i).remove();
+              }else{
+                  alert("Message can't delete, Please try again later.");
+              }
+          });
+
+          //alert("delete id : "+id);
+      }
+
+      function sendReplyMessageByEmail() {
+
+          replySub = $("#replySubject").val();
+          replyMgs = $("#replyMessage").val();
+
+          if(replySub!='' && replyMgs!=''){
+
+              $("#sendReplyByEmailModal").modal('hide');
+              $("#overlay").show();
+              $.post("reply-message-by-email",{email:contactMgs["email"], subject:replySub, message:replyMgs},
+                  function (data, status) {
+                  $("#overlay").hide();
+                  if(data){
+                      $("#replySubject").val('');
+                      $("#replyMessage").val('');
+
+                      $("#success-mgs").text("Message successfully sent to : "+contactMgs["email"]);
+                      $("#succeessToast").toast('show');
+
+                  }else{
+                     // alert("Message can't send, Please try again later.");
+                      $("#failedToast").text("Message can't send, Please try again later.");
+                      $("#failedToast").toast('show');
+                  }
+              });
+          }
+
+      }
+      */
+
+
+  </script>
+
+
+
+  <script>
+
+
+
+      function fetchHealthTips() {
+
+          $.post("fetch-health-tips", function (data, status) {
+              healthPostList = data;
+
+              tblRow = "";
+              for(i=0;i<healthPostList.length;i++)
+              {
+                  healthPost = healthPostList[i];
+                  tblRow+='<tr id="healthTipsTr'+i+'">';
+                  tblRow+='<td onclick="viewHealthTips('+i+')">'+healthPost["date"]+'</td>';
+                  tblRow+='<td onclick="viewHealthTips('+i+')">'+healthPost["title"]+'</td>';
+                  tblRow+='<td onclick="viewHealthTips('+i+')">'+healthPost["poster"]+'</td>';
+                  tblRow+='<td onclick="viewHealthTips('+i+')">'+healthPost["views"]+'</td>';
+                  tblRow+='<td> <button style="font-size: 11px;" type="button" ' +
+                      ' onclick="deleteHealthTips('+i+','+healthPost["id"]+')" class="btn btn-danger"> ' +
+                      '<i class="fa fa-trash-o" aria-hidden="true"></i> </button></td>';
+                  tblRow+='</tr>';
+              }
+
+              $("#healthTipsTblBody").empty();
+              $("#healthTipsTblBody").append(tblRow);
+
+          });
+      }
+
+
+      function uploadHealthTips() {
+
+
+          imgUploadWay =  $("#healthTipsUploadImgFileHolder .show").attr('id');
+
+          $("#addHealthTipsModal").modal('hide');
+          $("#overlay").show();
+
+         if(imgUploadWay=='imgFromUrl'){
+
+
+             $.post("upload-health-tips2",{
+                     imageUrl: $("#healthTipsImgUrl").val(),
+                     publisher: $("#healthTipsPublisher").val(),
+                     title: $("#healthTipsTitle").val(),
+                     description: $("#healthTipsDetails").val()
+                 }
+             , function (data, status) {
+                 $("#overlay").hide();
+                 if(data){
+                     $("#success-mgs").text("Health Tips successfully uploaded.");
+                     $("#succeessToast").toast('show');
+                     $(".input-box").val('');
+                     fetchHealthTips();
+                 }else{
+                     $("#failed-mgs").text("Can't upload Health Tips.");
+                     $("#failedToast").toast('show');
+                 }
+
+             });
+
+
+         }else if(imgUploadWay=='imgFromComputer'){
+
+
+             var post_data = new FormData();
+             post_data.append('imageFile', $('#healthTipsImgFile')[0].files[0]);
+             post_data.append('publisher', $("#healthTipsPublisher").val());
+             post_data.append('title', $("#healthTipsTitle").val());
+             post_data.append('description', $("#healthTipsDetails").val());
+
+
+             $.ajax({
+                 url: "upload-health-tips",
+                 type: "POST",
+                 data: post_data,// new FormData($("#upload-file-form")[0]),
+                 enctype: 'multipart/form-data',
+                 processData: false,
+                 contentType: false,
+                 cache: false,
+
+                 success: function () {
+                     $("#overlay").hide();
+                     $("#success-mgs").text("Health Tips successfully uploaded.");
+                     $("#succeessToast").toast('show');
+                     $(".input-box").val('');
+                     fetchHealthTips();
+                 },
+                 error: function () {
+                     $("#overlay").hide();
+                     $("#failed-mgs").text("Can't upload Health Tips.");
+                     $("#failedToast").toast('show');
+                 }
+             });
+
+
+         }
+
+      }
+
+
+
+      function viewHealthTips(i) {
+
+          //alert("healthTipsViewer : "+i);
+
+          healthPost = healthPostList[i];
+          $("#tipsImg").attr('src',healthPost["image"]);
+          $("#tipsPublisher").text(healthPost["poster"]);
+          $("#tipsPublishDate").text(healthPost["date"]);
+          $("#tipsView").text(healthPost["views"]);
+          $("#tipsTitle").text(healthPost["title"]);
+          $("#tipsDescription").text(healthPost["body"]);
+          $("#healthTipsViewer").modal("show");
+
+      }
+
+      function deleteHealthTips(i, id) {
+          $("#overlay").show();
+          $.post("delete-health-tips",{id:id}, function (data, status) {
+              $("#overlay").hide();
+              if(data){
+                  $("#healthTipsTr"+i).remove();
+              }else{
+                  $("#failedToast").text("Sorry, Health tips can't delete.");
+                  $("#failedToast").toast('show');
+              }
+          });
+      }
+
+      fetchHealthTips();
+
+
+
+
+
+
+      function fetchHealthTipsBook() {
+
+          $.post("fetch-health-tips-book", function (data, status) {
+              healthTipsBookList = data;
+
+              tblRow = "";
+              for(i=0;i<healthTipsBookList.length;i++)
+              {
+                  healthTipsBook = healthTipsBookList[i];
+                  tblRow+='<tr id="healthTipsBookTr'+i+'">';
+                  tblRow+='<td onclick="viewHealthTipsBook('+i+')">'+healthTipsBook["id"]+'</td>';
+                  tblRow+='<td onclick="viewHealthTipsBook('+i+')">'+healthTipsBook["description"]+'</td>';
+                  tblRow+='<td onclick="viewHealthTipsBook('+i+')">'+healthTipsBook["link"]+'</td>';
+                  tblRow+='<td> <button style="font-size: 11px;" type="button" ' +
+                      ' onclick="deleteHealthTipsBook('+i+','+healthTipsBook["id"]+')" class="btn btn-danger"> ' +
+                      '<i class="fa fa-trash-o" aria-hidden="true"></i> </button></td>';
+                  tblRow+='</tr>';
+              }
+
+              $("#healthTipsBookTblBody").empty();
+              $("#healthTipsBookTblBody").append(tblRow);
+
+          });
+      }
+
+
+
+
+
+
+      function uploadHealthTipsBook() {
+
+
+          imgUploadWay =  $("#healthTipsBookUploadImgFileHolder .show").attr('id');
+
+          $("#addHealthTipsBookModal").modal('hide');
+          $("#overlay").show();
+
+          if(imgUploadWay=='imgBookFromUrl'){
+
+
+              $.post("upload-health-tips-book2",{
+                      imageUrl: $("#healthTipsBookImgUrl").val(),
+                      link: $("#healthTipsBookLink").val(),
+                      description: $("#healthTipsBookDetails").val()
+                  }
+                  , function (data, status) {
+                      $("#overlay").hide();
+                      if(data){
+                          $("#success-mgs").text("Health Tips Book successfully uploaded.");
+                          $("#succeessToast").toast('show');
+                          $(".input-box").val('');
+                          fetchHealthTipsBook();
+                      }else{
+                          $("#failed-mgs").text("Can't upload Health Tips Book.");
+                          $("#failedToast").toast('show');
+                      }
+
+                  });
+
+
+          }else if(imgUploadWay=='imgBookFromComputer'){
+
+
+              var post_data = new FormData();
+              post_data.append('imageFile', $('#healthTipsBookImgFile')[0].files[0]);
+              post_data.append('link', $("#healthTipsBookLink").val());
+              post_data.append('description', $("#healthTipsBookDetails").val());
+
+
+              $.ajax({
+                  url: "upload-health-tips-book",
+                  type: "POST",
+                  data: post_data,// new FormData($("#upload-file-form")[0]),
+                  enctype: 'multipart/form-data',
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+
+                  success: function () {
+                      $("#overlay").hide();
+                      $("#success-mgs").text("Health Tips Book successfully uploaded.");
+                      $("#succeessToast").toast('show');
+                      $(".input-box").val('');
+                      fetchHealthTipsBook();
+                  },
+                  error: function () {
+                      $("#overlay").hide();
+                      $("#failed-mgs").text("Can't upload Health Tips Book.");
+                      $("#failedToast").toast('show');
+                  }
+              });
+
+          }
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+      function viewHealthTipsBook(i) {
+
+          healthTipsBook = healthTipsBookList[i];
+          $("#bookImg").attr('src',healthTipsBook["image"]);
+          $("#bookDescription").text(healthTipsBook["description"]);
+          $("#bookLink").text(healthTipsBook["link"]);
+          $("#bookLink").attr('href',healthTipsBook["link"]);
+          $("#healthTipsBookViewer").modal("show");
+
+      }
+
+      function deleteHealthTipsBook(i, id) {
+          $("#overlay").show();
+          $.post("delete-health-tips-book",{id:id}, function (data, status) {
+              $("#overlay").hide();
+              if(data){
+                  $("#healthTipsBookTr"+i).remove();
+              }else{
+                  $("#failedToast").text("Sorry, Health tips book can't delete.");
+                  $("#failedToast").toast('show');
+              }
+          });
+      }
+
+      fetchHealthTipsBook();
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+<div id="overlay">
+  <!-- <div class="spinner-grow text-muted"></div>
+  <div class="spinner-grow text-primary"></div>
+  <div class="spinner-grow text-success"></div>
+  <div class="spinner-grow text-info"></div>
+  <div class="spinner-grow text-warning"></div>
+  <div class="spinner-grow text-danger"></div>
+  <div class="spinner-grow text-secondary"></div>
+  <div class="spinner-grow text-dark"></div>
+  <div class="spinner-grow text-light"></div> -->
+  <div class="spinner-border text-primary" style="width: 100px; height:100px"></div>
+</div>
+
+
+
+<div data-delay="3000" style="position:fixed; display: block; left: 3%;top: 80%; z-index: 10;" class="toast2">
+  <div id="succeessToast" class="alert alert-success alert-dismissible fade hide">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Success!</strong>
+    <p id="success-mgs"> </p>
+  </div>
+</div>
+
+
+<div data-delay="3000" style="position:fixed; display: block; left: 3%;top: 80%; z-index: 10;" class="toast2">
+  <div id="failedToast" class="alert alert-danger alert-dismissible fade hide">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Warning!</strong>
+    <p id="failed-mgs"> </p>
+  </div>
+</div>
+
+
+
+<!-- Contact Message display modal --->
+<div class="modal fade" id="contactMessageDisplayModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Message</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+
+      <div class="modal-body">
+
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="contMgsDate"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="contMgsSender"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="contMgsEmail"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="contMgsSubject"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="contMgsBody"></p>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="replyContMessageBtn" type="button" class="btn btn-primary" data-dismiss="modal">Replay by Email</button>
+        <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Send Message by Email Modal -->
+<div class="modal fade" id="sendReplyByEmailModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Write Message</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 ">
+            <input id="replyEmailAddress" readonly class="input-box" type="text" placeholder="Enter patient id">
+            <input id="replySubject" class="input-box" type="text" placeholder="Enter Subject">
+          </div>
+          <div class="col-md-6 ">
+            <textarea id="replyMessage" style="height: 75px; resize: none; outline: none "
+                      class="input-box" type="text" rows="1" placeholder="Enter Message..."></textarea>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-success" onclick="sendReplyMessageByEmail()">Send Email</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Message display modal --->
+<div class="modal fade" id="messageDisplayModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Message</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+
+      <div class="modal-body">
+
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="mgsDate"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="mgsSender"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="mgsPatient"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="mgsSubject"></p>
+        <p  style="font-size: 14px; padding: 0px 10px; margin: 0px 5px;" id="messageBody"></p>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="replyMessageBtn" type="button" class="btn btn-primary" data-dismiss="modal">Replay</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Compose Message Modal -->
+<div class="modal fade" id="sendMessageModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Compose Message</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <div class="row">
+
+          <div class="col-md-6 ">
+            <input id="patientId" class="input-box" type="text" placeholder="Enter patient id">
+            <input id="subject" class="input-box" type="text" placeholder="Enter Subject">
+          </div>
+
+          <div class="col-md-6 ">
+            <textarea id="message" style="height: 75px; resize: none; outline: none "
+                    class="input-box" type="text" rows="1" placeholder="Enter Message..."></textarea>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="sendMessage()">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- Prescription History Modal -->
+<div class="modal fade" id="prescriptionHistoryModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 >History</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body" id="historyBody">
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button"  data-dismiss="modal" data-toggle="modal" class="btn btn-danger" >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Patient delete alert Modal -->
+<div class="modal fade" id="deletePatientInfoModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 >Delete</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+       <p>Are you sure want to delete this patient info ?</p>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" onclick="deletePatient()" data-dismiss="modal" class="btn btn-danger" >Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="drModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Doctor Profile</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <div style="text-align: center">
+          <img src="images/dr.png" class="img-circle img-responsive"
+               style="width: 100px">
+          <p style="margin-top: 20px" th:text="${email}"></p>
+        </div>
+
+        <div class="d-flex" style="justify-content: space-between; margin-top: 15px">
+          <div style="width: 48%">
+            <label >Name</label>
+            <input type="text" class="form-control inf" id="drName" placeholder="Enter name">
+          </div>
+          <div style="width: 48%">
+            <label >Degree</label>
+            <input type="text" class="form-control inf" id="drDegree" placeholder="Enter degree">
+          </div>
+        </div>
+
+        <div class="d-flex" style="justify-content: space-between; margin-top: 15px">
+          <div style="width: 48%">
+            <label >Phone</label>
+            <input type="number" class="form-control inf" id="drPhone" placeholder="Enter phone number">
+          </div>
+          <div style="width: 48%">
+            <label >Password</label>
+            <input type="password" class="form-control inf" id="drPassword" placeholder="Enter password">
+          </div>
+        </div>
+
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" onclick="updateDrInfo()" class="btn btn-primary" >Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light border-bottom fixed-top my-navbar">
+
+    <button class="btn btn-primary" id="menu-toggle">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <h6 style="padding: 0 15px;">MBSTU MEDICAL CENTER</h6>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            style="padding: 0px 20px;font-size: 13px;"> <img src="images/dr.png" class="img-circle img-responsive"
+              style="width: 30px">
+            <span id="dr-email" th:text="${email}"></span> </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" style="cursor: pointer" onclick="displayDrProfile()"> <i class="fa fa-user-md" aria-hidden="true"></i> Profile</a>
+            <a class="dropdown-item" href="doctor-logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+          </div>
+        </li>
+        <!-- <li class="nav-item active2 ">
+          <a class="nav-link2 logout-btn" href="#"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a>
+        </li> -->
+
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+
+
+  <style>
+    .menu-option-list>ul>li {
+      margin-left: -40px;
+      margin-right: 0px;
+      padding: 0px 0px;
+      list-style: none !important;
+      color: rgb(251, 250, 253);
+      cursor: pointer;
+    }
+
+    .menu-option-list>ul>li>a {
+      padding: 10px 20px;
+      display: block;
+      width: 100%;
+      text-decoration: none !important;
+      color: rgb(251, 250, 253);
+      border-radius: 0px;
+      transition: 200ms;
+      font-size: 16px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    }
+
+    .non-active-menu:hover {
+      background-color: #005dc06a;
+    }
+
+    .active-menu {
+      color: #fff;
+      background-color: #005dc0;
+      border-left: 3px solid #fff;
+    }
+  </style>
+
+
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+
+      <div id="sidebar-wrapper-layer">
+
+
+
+        <div class="menu-option-list">
+
+          <div style="
+             padding-top: 15px;
+             text-align:center;
+            ">
+            <img src="images/icon.png" class="img-circle" style="width: 100px; height: 100px;" />
+            <p style="
+              padding: 5px 0px;
+              color: #fff;
+              font-size: 14px;
+            ">Medical Center, MBSTU</p>
+
+          </div>
+
+          <ul>
+            <li><a onclick="selectOption(this,'homeSection')" class="active-menu "> <i class="fa fa-home"
+                                                                                       aria-hidden="true"></i> Home
+            </a></li>
+            <li>
+              <a onclick="selectOption(this,'allPatientSection')" class="non-active-menu"> <i
+                      class="fa fa-wheelchair-alt" aria-hidden="true"></i> All
+                patient</a>
+
+            </li>
+            <li>
+              <a onclick="selectOption(this,'messageSection')" class="non-active-menu"> <i
+                      class="fa fa-comments" aria-hidden="true"></i> Message</a>
+
+            </li>
+            <li>
+              <a onclick="selectOption(this, 'healthTipsSection')" class="non-active-menu"> <i
+                      class="fa fa-heartbeat" aria-hidden="true"></i> Health Tips </a>
+            </li>
+            <li>
+              <a onclick="selectOption(this, 'contactSection')"  class="non-active-menu"> <i class="fa fa-volume-control-phone"
+                                                                                             aria-hidden="true"></i> Contact Us</a>
+            </li>
+            <li>
+              <a onclick="selectOption(this, 'aboutUsSection2')"  class="non-active-menu"><i
+                      class="fa fa-info-circle" aria-hidden="true"> About us</i></a>
+            </li>
+            <!-- <li>
+              <a href="#" class="non-active-menu"> <i class="fa fa-question-circle" aria-hidden="true"></i> User
+                manual</a>
+            </li> -->
+
+          </ul>
+
+          <div style="text-align: center; margin-top:40px;">
+            <p style="color: #fff; font-size:12px;"> Powered by mCubeS <br /> ICT, MBSTU</p>
+          </div>
+          <div style="margin:0px 30px;width: 150px; height:1px; background:#fff;"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- /#sidebar-wrapper -->
+
+
+
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <div class="container" id="optSectionHolder">
+
+        <!--HOME SECTION-->
+
+        <section id="homeSection" style="margin-top: 20px;">
+
+          <div>
+            <p style="color: #2C82DC; font-weight: 400; font-size: 17px;"> <i
+                style="margin-right: 5px;border-radius: 100px; background-color:#fff; padding: 10px; box-shadow: 1px 3px 5px #dedede"
+                class="fa fa-home" aria-hidden="true"></i> HOME </p>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="my-card" style="margin:10px 5px; padding: 10px;">
+                <div style=" display:flex">
+                  <div>
+                    <i class="fa fa-user fa-3x" style="float:left; color: #8FBAE8" aria-hidden="true"></i>
+                  </div>
+                  <div style="width: 100%; text-align: right; ">
+                    <h6 style="color: #8FBAE8;">Teacher</h6>
+                    <h3 id="numOfTeacher">0</h3>
+                  </div>
+                </div>
+                <div style="border-top: 1px solid #eee;">
+                  <p style="margin:3px; font-size:12px; float: left; color: rgb(144, 144, 144)">percentage</p>
+                  <p id="percentageOfTeacher" style="margin:3px; font-size:12px; width: 100%; text-align: right; color: #06b806; "><b>0%</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+              <div class="my-card" style="margin:10px 5px; padding: 10px;">
+                <div style=" display:flex">
+                  <div>
+                    <i class="fa fa-graduation-cap fa-3x" style="float:left; color: #8FBAE8" aria-hidden="true"></i>
+                  </div>
+                  <div style="width: 100%; text-align: right; ">
+                    <h6 style="color: #8FBAE8;">Student</h6>
+                    <h3 id="numOfStudent">0</h3>
+                  </div>
+                </div>
+                <div style="border-top: 1px solid #eee;">
+                  <p style="margin:3px; font-size:12px; float: left; color: rgb(144, 144, 144)">percentage</p>
+                  <p id="percentageOfStudent" style="margin:3px; font-size:12px; width: 100%; text-align: right; color: #06b806; "><b>0%</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+              <div class="my-card" style="margin:10px 5px; padding: 10px;">
+                <div style=" display:flex">
+                  <div>
+                    <i class="fa fa-users fa-3x" style="float:left; color: #8FBAE8" aria-hidden="true"></i>
+                  </div>
+                  <div style="width: 100%; text-align: right; ">
+                    <h6 style="color: #8FBAE8;">Staff</h6>
+                    <h3 id="numOfStaff">0</h3>
+                  </div>
+                </div>
+                <div style="border-top: 1px solid #eee;">
+                  <p style="margin:3px; font-size:12px; float: left; color: rgb(144, 144, 144)">percentage</p>
+                  <p id="percentageOfStaff" style="margin:3px; font-size:12px; width: 100%; text-align: right; color: #06b806; "><b><span>0%</span></b>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-sm-3">
+              <div class="my-card" style="margin:10px 5px;">
+                <div style=" display:flex">
+                  <div>
+                    <i class="fa fa-user-md fa-3x" style="float:left; color: #8FBAE8" aria-hidden="true"></i>
+                  </div>
+                  <div style="width: 100%; text-align: right; ">
+                    <h6 style="color: #8FBAE8;">Doctor</h6>
+                    <h3>123</h3>
+                  </div>
+                </div>
+                <div style="border-top: 1px solid #eee;">
+                  <p style="margin:3px; font-size:12px; float: left; color: rgb(144, 144, 144)">percentage</p>
+                  <p style="margin:3px; font-size:12px; width: 100%; text-align: right; color: #06b806; "><b>13.55%</b>
+                  </p>
+                </div>
+              </div>
+            </div> -->
+
+
+
+
+
+          </div>
+
+
+
+
+
+          <script>
+
+
+            var tdata = [
+              { x: new Date(2017, 10, 1), y: 63 },
+              { x: new Date(2017, 10, 2), y: 69 },
+              { x: new Date(2017, 10, 3), y: 65 },
+              { x: new Date(2017, 10, 4), y: 70 },
+              { x: new Date(2017, 10, 5), y: 71 },
+              { x: new Date(2017, 10, 6), y: 65 },
+              { x: new Date(2017, 10, 7), y: 73 },
+              { x: new Date(2017, 10, 8), y: 96 },
+              { x: new Date(2017, 10, 9), y: 84 },
+              { x: new Date(2017, 10, 10), y: 85 },
+              { x: new Date(2017, 10, 11), y: 86 },
+              { x: new Date(2017, 10, 12), y: 94 },
+              { x: new Date(2017, 10, 13), y: 97 },
+              { x: new Date(2017, 10, 14), y: 86 }
+
+            ];
+
+            tdata.push({ x: new Date(2017, 10, 15), y: 89 });
+            //tdata.push({ x: new Date(2017, 10, 17), y: 189 });
+
+            var sdata = [
+              { x: new Date(2017, 10, 1), y: 60 },
+              { x: new Date(2017, 10, 2), y: 57 },
+              { x: new Date(2017, 10, 3), y: 51 },
+              { x: new Date(2017, 10, 4), y: 56 },
+              { x: new Date(2017, 10, 5), y: 54 },
+              { x: new Date(2017, 10, 6), y: 55 },
+              { x: new Date(2017, 10, 7), y: 54 },
+              { x: new Date(2017, 10, 8), y: 69 },
+              { x: new Date(2017, 10, 9), y: 65 },
+              { x: new Date(2017, 10, 10), y: 66 },
+              { x: new Date(2017, 10, 11), y: 63 },
+              { x: new Date(2017, 10, 12), y: 67 },
+              { x: new Date(2017, 10, 13), y: 66 },
+              { x: new Date(2017, 10, 14), y: 56 },
+              { x: new Date(2017, 10, 15), y: 64 }
+            ];
+
+            var stfdata = [
+              { x: new Date(2017, 10, 1), y: 160 },
+              { x: new Date(2017, 10, 2), y: 157 },
+              { x: new Date(2017, 10, 3), y: 151 },
+              { x: new Date(2017, 10, 4), y: 156 },
+              { x: new Date(2017, 10, 5), y: 154 },
+              { x: new Date(2017, 10, 6), y: 155 },
+              { x: new Date(2017, 10, 7), y: 154 },
+              { x: new Date(2017, 10, 8), y: 169 },
+              { x: new Date(2017, 10, 9), y: 165 },
+              { x: new Date(2017, 10, 10), y: 166 },
+              { x: new Date(2017, 10, 11), y: 163 },
+              { x: new Date(2017, 10, 12), y: 167 },
+              { x: new Date(2017, 10, 13), y: 166 },
+              { x: new Date(2017, 10, 14), y: 156 },
+              { x: new Date(2017, 10, 15), y: 164 }
+            ];
+
+
+
+            window.onload = function () {
+
+              var options = {
+
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                  text: "Patient Add History"
+                },
+                axisX: {
+                  valueFormatString: "DD MMM"
+                },
+                axisY: {
+                  title: "Patient",
+                  minimum: 30
+                },
+                toolTip: {
+                  shared: true
+                },
+                legend: {
+                  cursor: "pointer",
+                  verticalAlign: "bottom",
+                  horizontalAlign: "left",
+                  dockInsidePlotArea: true,
+                  itemclick: toogleDataSeries
+                },
+                data: [{
+                  type: "line",
+                  showInLegend: true,
+                  name: "Teacher",
+                  markerType: "circle",
+                  xValueFormatString: "DD MMM, YYYY",
+                  color: "#F08080",
+                  yValueFormatString: "#,##0",
+                  dataPoints: tdata
+                },
+                {
+                  type: "line",
+                  showInLegend: true,
+                  name: "Student",
+                  color: "#00dd00",
+                  lineDashType: "line",
+                  yValueFormatString: "#,##0",
+                  dataPoints: sdata
+                },
+                {
+                  type: "line",
+                  showInLegend: true,
+                  name: "Staff",
+                  color: "#0000ff",
+                  lineDashType: "line",
+                  yValueFormatString: "#,##0",
+                  dataPoints: stfdata
+                }
+                ]
+              };
+
+              $("#chartContainer").CanvasJSChart(options);
+
+              function toogleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                  e.dataSeries.visible = false;
+                } else {
+                  e.dataSeries.visible = true;
+                }
+                e.chart.render();
+              }
+
+            }
+
+          </script>
+
+
+          <div id="chartContainer" class="my-card"
+            style="margin: 25px 5px 30px 5px; padding: 0px 0px; height: 300px; width: 99%;">
+          </div>
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--ALL PATIENT SECTION-->
+
+        <section id="allPatientSection" style="margin-top: 20px">
+
+          <div>
+            <p style="color: #2C82DC; font-weight: 400; font-size: 17px;"> <i
+                style="margin-right: 5px;border-radius: 100px; background-color:#fff; padding: 10px; box-shadow: 1px 3px 5px #dedede"
+                class="fa fa-wheelchair-alt" aria-hidden="true"></i> ALL PATIENT </p>
+          </div>
+
+
+          <div class="my-card " style="margin:20px 5px; padding: 10px; ">
+
+
+            <div style="justify-content: space-between">
+              <button style="width: 130px; " class="btn btn-primary" onclick="addPatient()" data-target="#myModal"
+                data-toggle="modal"> <i class="fa fa-plus" aria-hidden="true"></i> Add
+                New</button>
+              <div style=" text-align: right; float: right">
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                  </div>
+                  <input id="searchPatient" class="form-control" type="text" placeholder="search patient">
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <table style="font-size:13px; margin-top: 20px;" class="table  table-responsive table-hover">
+              <thead>
+                <tr>
+                  <th style="text-align: center">Option</th>
+                  <th>Type</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Father</th>
+                  <th>Mother</th>
+                  <th>Address</th>
+                  <th>Gender</th>
+                  <th>DOB</th>
+                  <th>Blood</th>
+                  <th>Department</th>
+                  <th>Phone</th>
+                </tr>
+              </thead>
+
+
+              <tbody id="patientTbl"></tbody>
+
+            </table>
+
+
+          </div>
+
+
+
+
+
+          <!-- Patient Info Modal -->
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Add Patient</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+
+                  <div class="d-flex" style="justify-content: space-between">
+                    <div style="width: 48%">
+                      <label >Patient Type <span style="color: red">*</span></label>
+                      <select class="form-control" id="pInfo1" aria-placeholder="Select patient type">
+                        <option>Teacher</option>
+                        <option>Student</option>
+                        <option>Staff</option>
+                      </select>
+                    </div>
+                    <div style="width: 48%">
+                      <label >Select Department <span style="color: red">*</span></label>
+                      <select class="form-control" id="pInfo2">
+                        <option>ICT</option>
+                        <option>CSE</option>
+                        <option>TE</option>
+                        <option>BGE</option>
+                        <option>BMB</option>
+                        <option>Phermacy</option>
+                        <option>FTNS</option>
+                        <option>ESRM</option>
+                        <option>Chemistry</option>
+                        <option>Physics</option>
+                        <option>Mathematics</option>
+                        <option>CPS</option>
+                        <option>BBA</option>
+                        <option>Statistics</option>
+                        <option>CPS</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="d-flex" style="justify-content: space-between; margin-top: 10px">
+                    <div style="width: 48%">
+                      <label >Patient ID <span style="color: red">*</span></label>
+                      <input type="text" class="form-control inf" id="pInfo3" placeholder="Enter patient id">
+                    </div>
+                    <div style="width: 48%">
+                      <label >Patient Name <span style="color: red">*</span></label>
+                      <input type="text" class="form-control inf" id="pInfo4" placeholder="Enter patient name">
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex" style="justify-content: space-between; margin-top: 10px">
+                    <div style="width: 48%">
+                      <label >Father Name</label>
+                      <input type="text" class="form-control inf" id="pInfo5" placeholder="Enter father name">
+                    </div>
+                    <div style="width: 48%">
+                      <label >Mother Name</label>
+                      <input type="text" class="form-control inf" id="pInfo6" placeholder="Enter mother name">
+                    </div>
+                  </div>
+
+                  <div class="d-flex" style="justify-content: space-between; margin-top: 10px">
+                    <div style="width: 48%">
+                      <label >Address <span style="color: red">*</span></label>
+                      <input type="text" class="form-control inf" id="pInfo7" placeholder="Enter address">
+                    </div>
+                    <div style="width: 48%">
+                      <label >Gender <span style="color: red">*</span></label>
+                      <select class="form-control" id="pInfo8">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Others</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="d-flex" style="justify-content: space-between; margin-top: 10px">
+                    <div style="width: 48%">
+                      <label >Date of birth <span style="color: red">*</span></label>
+                      <input type="date" class="form-control inf" id="pInfo9" placeholder="Enter date of birth">
+                    </div>
+                    <div style="width: 48%">
+                      <label >Blood group <span style="color: red">*</span></label>
+                      <select class="form-control" id="pInfo10">
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>Don't know</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="d-flex" style="justify-content: space-between; margin-top: 10px">
+                    <div style="width: 48%">
+                      <label >Height (Feet)</label>
+                      <input type="number" class="form-control inf" id="pInfo11" placeholder="Enter patient's height">
+                    </div>
+                    <div style="width: 48%">
+                      <label >Weight (Kg)</label>
+                      <input type="number" class="form-control inf" id="pInfo12" placeholder="Enter patient's weight">
+                    </div>
+                  </div>
+
+                  <div class="d-flex" style="justify-content: space-between; margin-top: 10px">
+                    <div style="width: 48%">
+                      <label >Contact number</label>
+                      <input type="number" class="form-control inf" id="pInfo13"
+                        placeholder="Enter patient's phone number">
+                    </div>
+                    <div style="width: 48%">
+                      <label >Marital status</label>
+                      <select class="form-control" id="pInfo14">
+                        <option>Don't know</option>
+                        <option>Married</option>
+                        <option>Unmarried</option>
+                      </select>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" onclick="saveOrUpdate()" class="btn btn-success">Done</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+        </section>
+
+
+        <!--CONTACT US SECTION-->
+        <section id="contactSection" style="margin-top: 20px">
+
+          <div>
+            <p style="color: #2C82DC; font-weight: 400; font-size: 17px;"> <i
+                    style="margin-right: 5px;border-radius: 100px; background-color:#fff; padding: 10px; box-shadow: 1px 3px 5px #dedede"
+                    class="fa fa-volume-control-phone" aria-hidden="true"></i> CONTACT US </p>
+          </div>
+
+          <div class="my-card " style="margin:20px 5px; padding: 10px; ">
+
+            <div style="justify-content: space-between">
+
+              <div style=" text-align: left; width: 250px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                  </div>
+                  <input id="searchContactMessage" class="form-control" type="text" placeholder="search message">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="mgs-tbl-holder table-hover">
+
+              <table class="table mgs-tbl ">
+
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Sender</th>
+                  <th>Email</th>
+                  <th>Message</th>
+                  <th>Delete</th>
+                </tr>
+                </thead>
+
+                <tbody id="contactTblBody"></tbody>
+
+              </table>
+
+            </div>
+
+
+          </div>
+        </section>
+
+
+
+        <!--MESSAGE SECTION-->
+        <section id="messageSection" style="margin-top: 20px">
+
+          <div>
+            <p style="color: #2C82DC; font-weight: 400; font-size: 17px;">
+              <i style="margin-right: 5px;border-radius: 100px; background-color:#fff; padding: 10px; box-shadow: 1px 3px 5px #dedede"
+                    class="fa fa-comments" aria-hidden="true"></i> MESSAGE </p>
+          </div>
+
+          <div class="my-card " style="margin:20px 5px; padding: 10px; ">
+
+            <div style="justify-content: space-between">
+
+              <button style=" " class="btn btn-primary"  data-target="#sendMessageModal"
+                      data-toggle="modal"> <i class="fa fa-send" aria-hidden="true"></i> Send Message</button>
+              <div style=" text-align: right; float: right">
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                  </div>
+                  <input id="searchMessage" class="form-control" type="text" placeholder="search message">
+                </div>
+
+              </div>
+            </div>
+
+
+            <style>
+              .mgs-tbl-holder {
+                margin-top: 20px;
+                height: 380px;
+                overflow-y: scroll;
+              }
+
+              .mgs-tbl {
+                width: 100%;
+                font-size: 13px;
+              }
+
+              .mgs-tbl tbody tr td {
+                max-width: 260px;
+                color: #525252;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                cursor: pointer;
+              }
+
+              .fa-arrow-right {
+                color: #ff0000;
+              }
+
+              .fa-arrow-left {
+                color: #00ff00;
+              }
+            </style>
+
+
+
+            <div class="mgs-tbl-holder table-hover">
+
+              <table class="table mgs-tbl ">
+
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>In/Out</th>
+                  <th>Sender</th>
+                  <th>Message</th>
+                  <th>Status</th>
+                </tr>
+                </thead>
+
+                <tbody id="messageTblBody"></tbody>
+
+              </table>
+
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+        <!--HEALTH TIPS SECTION-->
+
+        <!-- Health Tips Modal Section -->
+
+        <div class="modal fade" id="addHealthTipsModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Add Health Tips</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+
+                <!-- Upload file form -->
+
+                <ul id="tabsJustified" class="nav nav-tabs">
+                  <li class="nav-item"><a href="" data-target="#imgFromComputer" data-toggle="tab" class="nav-link small text-uppercase">Image from computer</a></li>
+                  <li class="nav-item"><a href="" data-target="#imgFromUrl" data-toggle="tab" class="nav-link small text-uppercase active">Image from url</a></li>
+                </ul>
+
+                <div id="healthTipsUploadImgFileHolder" class="tab-content" >
+                 <div style="padding: 1px 0px" id="imgFromComputer" class="tab-pane fade">
+                   <input class="input-box" id="healthTipsImgFile" type="file" name="file"  accept="image/*" />
+                 </div>
+                <div id="imgFromUrl" class="tab-pane fade active show">
+                  <input  id="healthTipsImgUrl" class="input-box healthTipsInput" type="text" placeholder="Enter image url">
+                </div>
+                </div>
+
+                <input id="healthTipsPublisher" class="input-box" type="text" placeholder="Enter publisher name">
+                <input id="healthTipsTitle" class="input-box" type="text" placeholder="Enter health tips title">
+                <textarea id="healthTipsDetails" style="height: 150px; outline: none "
+                class="input-box" type="text" rows="1" placeholder="Enter description..."></textarea>
+
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="uploadHealthTips()">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- Health Tips Viewer -->
+        <!-- The Modal -->
+        <div class="modal fade" id="healthTipsViewer">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Health Tips</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div style="text-align: center">
+                  <img id="tipsImg" src="images/icon" style="padding: 5px 10px; width: 100%; height: auto">
+                </div>
+                <div class="d-flex" style="padding: 10px 10px ;font-size: 13px; color: #3face4; justify-content: space-between">
+                  <div style="text-align: center"><i class="fa fa-user"></i><p id="tipsPublisher"/></div>
+                  <div style="text-align: center"><i class="fa fa-calendar"></i><p id="tipsPublishDate"/></div>
+                  <div style="text-align: center"><i class="fa fa-eye"></i><p id="tipsView"/></div>
+                </div>
+                <h4  id="tipsTitle"></h4>
+                <p style="font-size: 14px; white-space: pre-line; padding: 10px 5px" id="tipsDescription"></p>
+
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <section id="healthTipsSection" style="margin-top: 20px">
+
+          <div>
+            <p style="color: #2C82DC; font-weight: 400; font-size: 17px;"> <i
+                    style="margin-right: 5px;border-radius: 100px; background-color:#fff; padding: 10px; box-shadow: 1px 3px 5px #dedede"
+                    class="fa fa-heartbeat" aria-hidden="true"></i> HEALTH TIPS </p>
+          </div>
+
+
+
+          <div class="my-card " style="margin:20px 5px; padding: 10px; ">
+            <div style="justify-content: space-between">
+              <button style=" " class="btn btn-primary"  data-target="#addHealthTipsModal"
+                      data-toggle="modal"> <i class="fa fa-plus" aria-hidden="true"></i> Health Tips</button>
+              <div style=" text-align: right; float: right">
+
+              <div style=" text-align: left; width: 250px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                  </div>
+                  <input id="searchHealthTips" class="form-control" type="text" placeholder="search health tips">
+                </div>
+              </div>
+            </div>
+            </div>
+
+            <div class="mgs-tbl-holder table-hover">
+
+              <table class="table mgs-tbl ">
+
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Publisher</th>
+                  <th>Views</th>
+                  <th>Delete</th>
+                </tr>
+                </thead>
+
+                <tbody id="healthTipsTblBody"></tbody>
+
+              </table>
+
+            </div>
+
+
+
+
+          </div>
+
+
+
+
+
+          <!-- Health Tips Book Modal Section -->
+
+
+          <!-- The Modal -->
+          <div class="modal fade" id="healthTipsBookViewer">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Health Tips Book</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <div style="text-align: center">
+                    <img id="bookImg" src="images/icon" style="width: 250px; height: auto">
+                  </div>
+                  <p style="font-size: 14px; padding: 10px 5px" id="bookDescription"></p>
+                  <a style="font-size: 14px; padding: 0px 5px 5px 5px; color: #2778bf;" target="_blank" id="bookLink"></a>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+          <!-- Health Tips Modal Section -->
+
+          <div class="modal fade" id="addHealthTipsBookModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Add Health Tips</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                  <!-- Upload file form -->
+
+                  <ul id="tabsJustified2" class="nav nav-tabs">
+                    <li class="nav-item"><a href="" data-target="#imgBookFromComputer" data-toggle="tab" class="nav-link small text-uppercase">Image from computer</a></li>
+                    <li class="nav-item"><a href="" data-target="#imgBookFromUrl" data-toggle="tab" class="nav-link small text-uppercase active">Image from url</a></li>
+                  </ul>
+
+                  <div id="healthTipsBookUploadImgFileHolder" class="tab-content" >
+                    <div style="padding: 1px 0px" id="imgBookFromComputer" class="tab-pane fade">
+                      <input class="input-box" id="healthTipsBookImgFile" type="file" name="file"  accept="image/*" />
+                    </div>
+                    <div id="imgBookFromUrl" class="tab-pane fade active show">
+                      <input  id="healthTipsBookImgUrl" class="input-box healthTipsInput" type="text" placeholder="Enter image url">
+                    </div>
+                  </div>
+
+                  <input id="healthTipsBookLink" class="input-box" type="text" placeholder="Enter book link">
+                  <textarea id="healthTipsBookDetails" style="height: 120px; outline: none "
+                            class="input-box" type="text" rows="1" placeholder="Enter description..."></textarea>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" onclick="uploadHealthTipsBook()">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- Health Tips Book Reference -->
+
+          <div class="my-card " style="margin:35px 5px; padding: 10px; ">
+            <div style="justify-content: space-between">
+              <button style=" " class="btn btn-primary"  data-target="#addHealthTipsBookModal"
+                      data-toggle="modal"> <i class="fa fa-plus" aria-hidden="true"></i> Health Tips Book</button>
+              <div style=" text-align: right; float: right">
+
+                <div style=" text-align: left; width: 250px;">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                    <input id="searchHealthTipsBook" class="form-control" type="text" placeholder="search health tips book">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mgs-tbl-holder table-hover">
+
+              <table class="table mgs-tbl ">
+
+                <thead>
+                <tr>
+                  <th>Serial Id</th>
+                  <th>Description</th>
+                  <th>Download Link</th>
+                  <th>Delete</th>
+                </tr>
+                </thead>
+
+                <tbody id="healthTipsBookTblBody"></tbody>
+
+              </table>
+
+            </div>
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+
+
+
+
+
+
+        <!--ABOUT US SECTION-->
+        <section id="aboutUsSection" style="margin-top: 20px">
+
+          <div>
+            <p style="color: #2C82DC; font-weight: 400; font-size: 17px;"> <i
+                    style="margin-right: 5px;border-radius: 100px; background-color:#fff; padding: 10px; box-shadow: 1px 3px 5px #dedede"
+                    class="fa fa-info-circle" aria-hidden="true"></i> ABOUT US </p>
+          </div>
+
+          <div class="my-card " style="margin:20px 5px; padding: 10px; ">
+
+            <h3 style="text-align: center; margin-top: 20px">Mawlana Bhashani Science and Technology University, Medical
+              Center
+            </h3>
+
+            <p style="text-align: center;">Version 2.0.19</p>
+
+            <h5
+                    style="margin:0px 50px; text-align: center; border: 2px solid #2C82DC; padding: 10px 20px; border-radius: 5px">
+              A Complete
+              & Useful Tool for
+              The Medical Center of
+              MBSTU
+            </h5>
+
+            <div style="margin:20px 0px 0px 50px;">
+
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <p>Instraction & idea : </p>
+                  <ul>
+                    <li>Professor Dr. Muhammad Shahin Uddin</li>
+                    <p style="margin:0px">Dean, Faculty of Engineering, MBSTU</p>
+                    <p style="margin:0px">Email : shan96103@yahoo.com</p>
+                    <p style="margin:0px">Phone : +8801759-852318</p>
+                  </ul>
+                </div>
+
+                <div class="col-sm-6">
+                  <p>Grateful to : </p>
+                  <ul>
+                    <li>Professor Dr. Md. Alauddin</li>
+                    <p style="margin:0px">Vice-Chancellor, MBSTU</p>
+                    <li>Also grateful to all the honourable Teachers of MBSTU.</li>
+                    <li>Special thanks to, Mamunurrashid Mamun, ICT 11th Batch</li>
+                  </ul>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div align="center" style="text-align: center">
+
+              <h6 style="margin-top:5px; text-align:center;">Developers</h6>
+
+              <div class="row" style="font-size: 13px">
+                <div class="col-sm-3">
+                  <a href="https://www.facebook.com/wazidullah.murad" target="_blank"> <i class="fa fa-laptop"
+                                                                                          aria-hidden="true"></i>
+                    Wazid Ullah Murad</a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="https://www.facebook.com/ismayel.hossen.77" target="_blank"> <i class="fa fa-laptop"
+                                                                                           aria-hidden="true"></i>
+                    Ismayel Hossen</a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="https://www.facebook.com/khaledhasan.manna" target="_blank"> <i class="fa fa-laptop"
+                                                                                           aria-hidden="true"></i>
+                    Khaled Hasan Manna</a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="https://www.facebook.com/raj.shikder.71" target="_blank"> <i class="fa fa-laptop"
+                                                                                        aria-hidden="true"></i>
+                    Abdullah-Al-Mamun</a>
+                </div>
+              </div>
+
+              <p style="margin: 10px; text-align:center; font-size:12px;">( All are from 'ICT 13th Batch, MBSTU' )</p>
+
+
+            </div>
+
+
+            <p
+                    style="font-size:13px;margin:10px 100px; text-align: center; color:#0aa839; padding: 0px 10px; border-radius: 5px">
+              Dedicated to, All the FREEDOM FIGHTERS of '1971'
+            </p>
+
+          </div>
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function () {
+      $("#wrapper").toggleClass("toggled");
+      $("#page-content-wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>
