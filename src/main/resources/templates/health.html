@@ -386,15 +386,15 @@
                                     <!--</a>-->
                                 <!--</li>-->
 
-                                <th:block th:each="i: ${#numbers.sequence(fp, lp, 1)}">
+                                <!--<th:block th:each="i: ${#numbers.sequence(fp, lp, 1)}">-->
 
-                                    <!-- Main  -->
+                                    <!--&lt;!&ndash; Main  &ndash;&gt;-->
 
-                                    <li th:classappend="${i==selectedPos}?'active':'not-active'" class="page-item" >
-                                        <a class="page-link" th:text="${i}" th:href="@{health(fp=${fp}, pos=${i}, lp=${lp})}"></a>
-                                    </li>
+                                    <!--<li th:classappend="${i==selectedPos}?'active':'not-active'" class="page-item" >-->
+                                        <!--<a class="page-link" th:text="${i}" th:href="@{health(fp=${fp}, pos=${i}, lp=${lp})}"></a>-->
+                                    <!--</li>-->
 
-                                </th:block>
+                                <!--</th:block>-->
 
 
                                 <!--<li th:classappend="${(selectedPos+1)>pageCount?'disabled':'able'}" class="page-item">-->
