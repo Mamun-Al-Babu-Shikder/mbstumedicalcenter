@@ -43,10 +43,13 @@ public class HealthController {
                 int selectedPos = pos<=0 ? 1 : pos>pageCount ? pageCount : pos;
                 startPos = dataLimit*(selectedPos-1);
 
-                healthPostList = session.createNativeQuery("SELECT * FROM `healthpost` ORDER by id desc LIMIT "
-                        +startPos+","+dataLimit, HealthPost.class).list();
+                //healthPostList = session.createNativeQuery("SELECT * FROM `healthpost` ORDER by id desc LIMIT " +startPos+","+dataLimit, HealthPost.class).list();
+                healthPostList = session.createNativeQuery("SELECT * FROM `healthpost` ORDER by id desc LIMIT " +dataLimit, HealthPost.class).list();
+
                 modelMap.addAttribute("healthPostList", healthPostList);
                 modelMap.addAttribute("selectedPos", selectedPos);
+
+
 
                 /*
                 if(pageCount<=pageLimit){
