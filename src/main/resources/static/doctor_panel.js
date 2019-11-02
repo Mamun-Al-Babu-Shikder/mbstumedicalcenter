@@ -82,11 +82,8 @@ function getPatient() {
             tblRow+='<td onclick="selectedPatient('+p["id"]+')" style="text-align: center">'+p['pdept']+'</td>';
             tblRow+='<td onclick="selectedPatient('+p["id"]+')" >'+p['pcontact']+'</td>';
 
-
             tblRow+="</tr>";
-
         }
-
 
         $("#numOfTeacher").text(numOfTeacher);
         $("#numOfStudent").text(numOfStudent);
@@ -105,7 +102,6 @@ function getPatient() {
 
         $("#patientTbl").empty();
         $("#patientTbl").append(tblRow);
-
 
     });
 
@@ -691,7 +687,7 @@ function prescriptionHistory(ctx, v) {
             hlist+='</div>';
             hlist+='</div>';
             hlist+='<div style="padding: 15px 15px;">';
-            hlist+='<p style="margin: 0px; font-size: 14px"> '+phistory["body"]+' </p>';
+            hlist+='<p style="margin: 0px; font-size: 14px; white-space: pre-line"> '+phistory["body"]+' </p>';
             hlist+='</div>';
             hlist+='</div>';
         }

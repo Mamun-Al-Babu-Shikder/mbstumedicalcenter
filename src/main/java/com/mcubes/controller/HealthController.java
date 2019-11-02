@@ -44,7 +44,7 @@ public class HealthController {
                 startPos = dataLimit*(selectedPos-1);
 
                 //healthPostList = session.createNativeQuery("SELECT * FROM `healthpost` ORDER by id desc LIMIT " +startPos+","+dataLimit, HealthPost.class).list();
-                healthPostList = session.createNativeQuery("SELECT * FROM healthpost where id>="+startPos+" ORDER by id desc LIMIT " +dataLimit, HealthPost.class).list();
+                healthPostList = session.createNativeQuery("SELECT * FROM healthpost  ORDER by id desc LIMIT " +dataLimit+" offset "+startPos, HealthPost.class).list();
 
                 modelMap.addAttribute("healthPostList", healthPostList);
                 modelMap.addAttribute("selectedPos", selectedPos);
@@ -110,7 +110,7 @@ public class HealthController {
                 randVal = (int) ((totalBook - 5) * Math.random());
             }
             System.out.println("#totalBook : " + totalBook + "  #Rand Value : " + randVal);
-            List<HealthTipsBook> healthTipsBookList = session.createNativeQuery("SELECT * FROM healthtipsbook where id>="+randVal+" LIMIT 5", HealthTipsBook.class).list();
+            List<HealthTipsBook> healthTipsBookList = session.createNativeQuery("SELECT * FROM healthtipsbook where id>="+randVal+" order by id desc LIMIT 5", HealthTipsBook.class).list();
 
             modelMap.addAttribute("healthTipsBookList", healthTipsBookList);
 
