@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     getDoctor();
     getPatient();
-    fetchMessage();
+    //fetchMessage();
     fetchHealthTips();
     fetchContactMessage();
 
@@ -116,6 +116,12 @@ function selectOption(ctx, opt) {
     for (i = 0; i < ids.length; i++) {
         $(ids[i]).hide();
     }
+
+
+    if(opt=='messageSection'){
+        fetchMessage();
+    }
+
     $(ctx).removeClass("non-active-menu");
     $(ctx).addClass("active-menu");
     $("#" + opt).show();
@@ -195,8 +201,12 @@ function updateDrInfo() {
 
 function fetchMessage() {
 
+    $("#overlay").show();
+
     drEmail = $("#dr-email").text();
     $.post("fetch-message-by-doctor", {dremail: drEmail}, function (data, status) {
+
+        $("#overlay").hide();
 
         messageList = data;
         tblRow = "";

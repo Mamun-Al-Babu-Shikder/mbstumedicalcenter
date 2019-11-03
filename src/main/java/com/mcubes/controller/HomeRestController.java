@@ -4,6 +4,7 @@ import com.mcubes.dbservice.SessionService;
 import com.mcubes.model.Contact;
 import com.mcubes.model.Medicine;
 import com.mcubes.model.Subscriber;
+import com.mcubes.service.SendEmail;
 import org.hibernate.Transaction;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +45,7 @@ public class HomeRestController {
                 session.save(contact);
                 t.commit();
                 b = true;
+
             }catch (Exception e){
                 b = false;
             }
@@ -63,6 +65,12 @@ public class HomeRestController {
                 session.save(subscriber);
                 t.commit();
                 b = true;
+
+                SendEmail.sendEmail(subscriberEmail,"Subscribe success !",
+                        "Dear subscriber, you successfully subscribed to us. Now you will get update of our activity.",
+                        SendEmail.TEXT_MAIL);
+
+
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }

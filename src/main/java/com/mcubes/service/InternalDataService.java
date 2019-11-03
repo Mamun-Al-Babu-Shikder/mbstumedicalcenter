@@ -14,27 +14,27 @@ public class InternalDataService {
     public static void getFooterData(ModelMap modelMap){
 
 
-        modelMap.addAttribute("devName_1","Md. Fahim Al Mamun");
-        modelMap.addAttribute("devLink_1","https://www.facebook.com/raj.shikder.71");
-
-        modelMap.addAttribute("devName_2","Mobarak Hossen");
-        modelMap.addAttribute("devLink_2","https://www.facebook.com/ismayel.hossen.77");
-
-        modelMap.addAttribute("devName_3","Abdullah-Al-Mamun");
-        modelMap.addAttribute("devLink_3","https://www.facebook.com/wazidullah.murad");
+//        modelMap.addAttribute("devName_1","Md. Fahim Al Mamun");
+//        modelMap.addAttribute("devLink_1","https://www.facebook.com/raj.shikder.71");
+//
+//        modelMap.addAttribute("devName_2","Mobarak Hossen");
+//        modelMap.addAttribute("devLink_2","https://www.facebook.com/ismayel.hossen.77");
+//
+//        modelMap.addAttribute("devName_3","Abdullah-Al-Mamun");
+//        modelMap.addAttribute("devLink_3","https://www.facebook.com/wazidullah.murad");
 
 
         modelMap.addAttribute("devName_4","Abdullah-Al-Mamun");
         modelMap.addAttribute("devLink_4","https://www.facebook.com/raj.shikder.71");
 
-//        modelMap.addAttribute("devName_2","Ismayel Hossen");
-//        modelMap.addAttribute("devLink_2","https://www.facebook.com/ismayel.hossen.77");
-//
-//        modelMap.addAttribute("devName_3","Wazid Ullah Murad");
-//        modelMap.addAttribute("devLink_3","https://www.facebook.com/wazidullah.murad");
-//
-//        modelMap.addAttribute("devName_4","Khaled Hassan Manna");
-//        modelMap.addAttribute("devLink_4","https://www.facebook.com/khaledhasan.manna");
+        modelMap.addAttribute("devName_2","Ismayel Hossen");
+        modelMap.addAttribute("devLink_2","https://www.facebook.com/ismayel.hossen.77");
+
+        modelMap.addAttribute("devName_3","Wazid Ullah Murad");
+        modelMap.addAttribute("devLink_3","https://www.facebook.com/wazidullah.murad");
+
+        modelMap.addAttribute("devName_4","Khaled Hassan Manna");
+        modelMap.addAttribute("devLink_4","https://www.facebook.com/khaledhasan.manna");
 
         modelMap.addAttribute("mcubesFbLink","https://www.facebook.com/mcubesit");
         modelMap.addAttribute("mcubesTwitterLink","https://www.facebook.com/mcubesit");

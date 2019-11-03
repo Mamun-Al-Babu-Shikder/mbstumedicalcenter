@@ -31,6 +31,72 @@
 
     </style>
 
+    <script>
+
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+
+        function sendComment() {
+
+            var name = $("#cont_name").val();
+            var email = $("#cont_email").val();
+            var mgs = $("#cont_mgs").val();
+
+            if(name=='' || email =='' || mgs=='' || !validateEmail(email)){
+                $("#failed-mgs").text("Failed to submit comment, Invalid information.");
+                $("#failedToast").toast('show');
+            }else{
+                $("#overlay").show();
+                $.post("comment-to-blog",{name: name, email: email, mgs: mgs}, function (data) {
+                    $("#overlay").hide();
+                    if(data){
+                        $("#success-mgs").text("Comment successfully submit.");
+                        $("#succeessToast").toast('show');
+                    }else{
+                        $("#failed-mgs").text("Failed to submit comment.");
+                        $("#failedToast").toast('show');
+                    }
+                });
+            }
+        }
+
+
+        /*
+         @ Subscribe Request
+         */
+        function subscribeRequest() {
+
+            subscriberEmail = $(".subscribe-email").val();
+            if (!validateEmail(subscriberEmail)) {
+                $("#toast-mgs").text("Please enter valid email address and try again.");
+                $('#tost').toast('show');
+            } else {
+                $("#overlay").show();
+                $.post("send-subscribe-request",{subscriberEmail:subscriberEmail}, function (data, status) {
+                    $(".subscribe-email").val('');
+                    $("#overlay").hide();
+                    if(data){
+                        $("#toast-mgs2").text("You successfully subscribed.");
+                        $('#tost2').toast('show');
+                    }else{
+                        $("#toast-mgs").text("Already subscribed by this email.");
+                        $('#tost').toast('show');
+                    }
+                })
+            }
+        }
+
+
+
+    </script>
+
+
+
+
+
 
 </head>
 
@@ -54,6 +120,24 @@
         <div class="spinner-border text-primary" style="z-index:27; width: 100px; height:100px"></div>
     </div>
 
+
+
+    <div data-delay="3000" style="position:fixed; display: block; left: 3%;top: 80%; z-index: 10;" class="toast2">
+        <div id="succeessToast" class="alert alert-success alert-dismissible fade hide">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong>
+            <p id="success-mgs"> </p>
+        </div>
+    </div>
+
+
+    <div data-delay="3000" style="position:fixed; display: block; left: 3%;top: 80%; z-index: 10;" class="toast2">
+        <div id="failedToast" class="alert alert-danger alert-dismissible fade hide">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Warning!</strong>
+            <p id="failed-mgs"> </p>
+        </div>
+    </div>
 
 
 
@@ -189,7 +273,7 @@
                     <div class="back-to-back">
                         <a href="#">Health </a>
                         <span class="fa fa-arrow-right"></span>
-                        <a href="#">Home </a>
+                        <a href="/">Home </a>
                     </div>
 
 

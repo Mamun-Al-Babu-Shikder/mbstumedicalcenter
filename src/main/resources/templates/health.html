@@ -353,13 +353,13 @@
                                     <div class="post-details">
                                         <h4 th:text="${healthPost.title}"></h4>
                                         <p th:text="${healthPost.body}"></p>
-                                        <form th:action="@{read-more}" method="post">
-                                            <input type="hidden" name="id" th:value="${healthPost.id}">
-                                            <input class="post-like-btn" type="submit" value="Read More...">
-                                        </form>
-                                        <!--<a class="post-like-btn" th:href="@{read-more/__${healthPost.id}__}">-->
-                                            <!--Read More...-->
-                                        <!--</a>-->
+                                        <!--<form th:action="@{read-more}" method="get">-->
+                                            <!--<input type="hidden" name="id" th:value="${healthPost.id}">-->
+                                            <!--<input class="post-like-btn" type="submit" value="Read More...">-->
+                                        <!--</form>-->
+                                        <a class="post-like-btn" th:href="@{read-more(id=${healthPost.id})}">
+                                            Read More...
+                                        </a>
                                     </div>
                                 </div>
                             </div>

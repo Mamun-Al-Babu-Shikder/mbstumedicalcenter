@@ -78,30 +78,37 @@ public class DoctorPanelController {
     @RequestMapping(value = "doctor-sign-up", method = RequestMethod.POST)
     private String drSignUp(ModelMap modelMap, HttpServletRequest request, @RequestParam String email,
                             @RequestParam String pass, @RequestParam String name, @RequestParam String phone,
-                            @RequestParam String degree)
+                            @RequestParam String degree, @RequestParam String code)
     {
 
-        SessionService.sessionBuilder(session -> {
+        if(code.equals("mcubes10114954")) {
 
-            Doctor doctor = new Doctor();
-            doctor.setEmail(email);
-            doctor.setPassword(pass);
-            doctor.setName(name);
-            doctor.setPhone(phone);
-            doctor.setDegree(degree);
+            SessionService.sessionBuilder(session -> {
 
-            try {
-                Transaction t= session.beginTransaction();
-                session.save(doctor);
-                t.commit();
-                url ="redirect:/doctor-login-page";
-            }catch (Exception ex){
-                url ="doctor/drsignup";
-                modelMap.addAttribute("mgs","Email address maybe already exist. Please try again with another one.");
-                //ex.printStackTrace();
-            }
+                Doctor doctor = new Doctor();
+                doctor.setEmail(email);
+                doctor.setPassword(pass);
+                doctor.setName(name);
+                doctor.setPhone(phone);
+                doctor.setDegree(degree);
 
-        });
+                try {
+                    Transaction t = session.beginTransaction();
+                    session.save(doctor);
+                    t.commit();
+                    url = "redirect:/doctor-login-page";
+                } catch (Exception ex) {
+                    url = "doctor/drsignup";
+                    modelMap.addAttribute("mgs", "Email address maybe already exist. Please try again with another one.");
+                    //ex.printStackTrace();
+                }
+
+            });
+
+        }else{
+            url = "doctor/drsignup";
+            modelMap.addAttribute("mgs", "Wrong secure code, Please try with correct code. ( You can contact with developer )");
+        }
 
         return url;
     }

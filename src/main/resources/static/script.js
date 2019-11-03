@@ -25,6 +25,12 @@ function sendContactMessage() {
                 if(data){
                 $("#toast-mgs2").text("Successfully message sent.");
                 $('#tost2').toast('show');
+
+                    $("#cont_name").val('');
+                    $("#cont_email").val('');
+                    $("#cont_subject").val('');
+                    $("#cont_mgs").val('');
+
             }else{
                 $("#toast-mgs").text("Message can't sent, Please try again later.");
                 $('#tost').toast('show');
@@ -34,6 +40,8 @@ function sendContactMessage() {
     }
 
 }
+
+
 
 
 function subscribeRequest() {
@@ -60,10 +68,12 @@ function subscribeRequest() {
 }
 
 
+
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+
 
 
 
