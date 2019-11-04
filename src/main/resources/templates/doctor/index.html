@@ -870,6 +870,10 @@
                       class="fa fa-heartbeat" aria-hidden="true"></i> Health Tips </a>
             </li>
             <li>
+              <a onclick="selectOption(this, 'medicineListSection')" class="non-active-menu"> <i
+                      class="fa fa-medkit" aria-hidden="true"></i> Medicine List </a>
+            </li>
+            <li>
               <a onclick="selectOption(this, 'contactSection')"  class="non-active-menu"> <i class="fa fa-volume-control-phone"
                                                                                              aria-hidden="true"></i> Contact Us</a>
             </li>
@@ -884,7 +888,7 @@
 
           </ul>
 
-          <div style="text-align: center; margin-top:40px;">
+          <div style="text-align: center; margin-top:15px;">
             <p style="color: #fff; font-size:12px;"> Powered by mCubeS <br /> ICT, MBSTU</p>
           </div>
           <div style="margin:0px 30px;width: 150px; height:1px; background:#fff;"></div>
@@ -1514,6 +1518,7 @@
         <!-- Health Tips Modal Section -->
 
         <div class="modal fade" id="addHealthTipsModal">
+
           <div class="modal-dialog">
             <div class="modal-content">
               <!-- Modal Header -->
@@ -1614,7 +1619,9 @@
 
 
           <div class="my-card " style="margin:20px 5px; padding: 10px; ">
+
             <div style="justify-content: space-between">
+
               <button style=" " class="btn btn-primary"  data-target="#addHealthTipsModal"
                       data-toggle="modal"> <i class="fa fa-plus" aria-hidden="true"></i> Health Tips</button>
               <div style=" text-align: right; float: right">
@@ -1780,14 +1787,124 @@
 
             </div>
 
+          </div>
+
+        </section>
 
 
 
+
+
+
+
+        <section id="medicineListSection" style="margin-top: 20px">
+
+          <div>
+            <p style="color: #2C82DC; font-weight: 400; font-size: 17px;"> <i
+                    style="margin-right: 5px;border-radius: 100px; background-color:#fff; padding: 10px; box-shadow: 1px 3px 5px #dedede"
+                    class="fa fa-medkit" aria-hidden="true"></i> Medicine List </p>
           </div>
 
 
+          <script>
+
+            $(document).ready(function () {
+
+                $("#selectMedicineFirstChar").change(function () {
+
+                    var searchOpt = $(this).val();
+                    alert(searchOpt);
+
+                });
+
+            });
 
 
+
+
+
+          </script>
+
+
+
+
+          <div class="my-card " style="margin:20px 5px; padding: 10px; ">
+
+            <div style="justify-content: space-between">
+
+              <select style="width: 80px; padding: 5px 5px; "  id="selectMedicineFirstChar">
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+              <option>E</option>
+              <option>F</option>
+              <option>G</option>
+              <option>H</option>
+              <option>I</option>
+              <option>J</option>
+              <option>K</option>
+              <option>L</option>
+              <option>M</option>
+              <option>N</option>
+              <option>O</option>
+              <option>P</option>
+              <option>Q</option>
+              <option>R</option>
+              <option>S</option>
+              <option>T</option>
+              <option>U</option>
+              <option>V</option>
+              <option>W</option>
+              <option>X</option>
+              <option>Y</option>
+              <option>Z</option>
+              </select>
+
+
+
+
+              <div style=" text-align: right; float: right">
+                <div style=" text-align: left; width: 250px;">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                    <input id="searchHealthTips2" class="form-control" type="text" placeholder="search medicine">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="mgs-tbl-holder table-hover">
+
+              <table class="table mgs-tbl ">
+
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Percentage</th>
+                  <th>Element</th>
+                  <th>Company</th>
+                  <th>Price</th>
+                  <th>Update</th>
+                  <th>Suggestion</th>
+                </tr>
+                </thead>
+
+                <tbody id="medicineListTblBody"></tbody>
+
+              </table>
+
+            </div>
+
+
+          </div>
 
 
 
@@ -1802,7 +1919,10 @@
 
 
 
-        <!--ABOUT US SECTION-->
+
+
+
+          <!--ABOUT US SECTION-->
         <section id="aboutUsSection" style="margin-top: 20px">
 
           <div>

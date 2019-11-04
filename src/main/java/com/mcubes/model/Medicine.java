@@ -1,5 +1,7 @@
 package com.mcubes.model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,6 +20,8 @@ public class Medicine {
     private String element;
     private String company;
     private String price;
+    @Column(nullable = false)
+    private Integer suggestion;
 
     public Medicine() {
     }
@@ -78,6 +82,14 @@ public class Medicine {
         this.price = price;
     }
 
+    public Integer getSuggestion() {
+        return suggestion;
+    }
+
+    public void setSuggestion(Integer suggestion) {
+        this.suggestion = suggestion;
+    }
+
     @Override
     public String toString() {
         return "Medicine{" +
@@ -88,6 +100,7 @@ public class Medicine {
                 ", element='" + element + '\'' +
                 ", company='" + company + '\'' +
                 ", price='" + price + '\'' +
+                ", suggestion=" + suggestion +
                 '}';
     }
 }
