@@ -1810,15 +1810,90 @@
 
             $(document).ready(function () {
 
+                searchMedicineByAbc("#");
+
                 $("#selectMedicineFirstChar").change(function () {
-
                     var searchOpt = $(this).val();
-                    alert(searchOpt);
+                    searchMedicineByAbc(searchOpt);
+                });
 
+                $("#searchMedicineDr").keyup(function () {
+                    var sv = $(this).val().toLowerCase();
+                    $("#medicineListTblBody tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(sv) > -1);
+                    });
                 });
 
             });
 
+
+
+            function searchMedicineByAbc(opt) {
+
+                $("#overlay").show();
+                $.post("fetch-medicine-by-abc",{abcOpt:opt}, function (data) {
+                    $("#overlay").hide();
+                    messageList =  data;
+                    tblRow="";
+                    for(i=0;i<data.length;i++){
+                        medicine = messageList[i];
+                        tblRow+='<tr>';
+                        if(medicine.suggestion==0){
+                            tblRow+='<td id="tdSuggBtn'+medicine.id+'"> <button style="font-size: 10px;" type="button" ' +
+                                ' onclick="saveToSuggestion('+medicine.id+')" class="btn btn-success"> ' +
+                                '<i class="fa fa-check" aria-hidden="true"></i> </button></td>';
+                        }else{
+                            tblRow+='<td id="tdSuggBtn'+medicine.id+'"> <button style="font-size: 10px;" type="button" ' +
+                                ' onclick="removeFromSuggestion('+medicine.id+')" class="btn btn-danger"> ' +
+                                '<i class="fa fa-times" aria-hidden="true"></i> </button></td>';
+                        }
+                        tblRow+='<td><button style="font-size: 10px;" type="button" ' +
+                            ' onclick="" class="btn btn-primary"> ' +
+                            '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button></td>';
+                        tblRow+='<td>'+medicine.name+'</td>';
+                        tblRow+='<td >'+medicine.category+'</td>';
+                        tblRow+='<td >'+medicine.percentage+'</td>';
+                        tblRow+='<td >'+medicine.element+'</td>';
+                        tblRow+='<td >'+medicine.company+'</td>';
+                        tblRow+='<td>'+medicine.price+'</td>';
+                        tblRow+='</tr>';
+                    }
+                    $("#medicineListTblBody").empty();
+                    $("#medicineListTblBody").append(tblRow);
+                });
+            }
+
+
+
+            function saveToSuggestion(id) {
+
+                $("#overlay").show();
+                $.post("save-or-remove-medicine-suggestion",{id:id, sugg:1}, function (data) {
+                    $("#overlay").hide();
+                    if(data){
+                        $("#tdSuggBtn"+id+" button").remove();
+                        $("#tdSuggBtn"+id).append(' <button style="font-size: 10px;" type="button" ' +
+                            ' onclick="removeFromSuggestion('+id+')" class="btn btn-danger"> ' +
+                            '<i class="fa fa-times" aria-hidden="true"></i> </button>');
+                    }
+                });
+
+            }
+
+            function removeFromSuggestion(id) {
+
+                $("#overlay").show();
+                $.post("save-or-remove-medicine-suggestion",{id:id, sugg:0}, function (data) {
+                    $("#overlay").hide();
+                    if(data){
+                        $("#tdSuggBtn"+id+" button").remove();
+                        $("#tdSuggBtn"+id).append(' <button style="font-size: 10px;" type="button" ' +
+                            ' onclick="saveToSuggestion('+id+')" class="btn btn-success"> ' +
+                            '<i class="fa fa-check" aria-hidden="true"></i> </button>');
+                    }
+                });
+
+            }
 
 
 
@@ -1832,7 +1907,8 @@
 
             <div style="justify-content: space-between">
 
-              <select style="width: 80px; padding: 5px 5px; "  id="selectMedicineFirstChar">
+              <select style="width: 80px; padding: 3px 5px; "  id="selectMedicineFirstChar">
+              <option>#</option>
               <option>A</option>
               <option>B</option>
               <option>C</option>
@@ -1870,7 +1946,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
                     </div>
-                    <input id="searchHealthTips2" class="form-control" type="text" placeholder="search medicine">
+                    <input id="searchMedicineDr" class="form-control" type="text" placeholder="search medicine">
                   </div>
                 </div>
               </div>
@@ -1878,22 +1954,20 @@
 
 
 
-
-
             <div class="mgs-tbl-holder table-hover">
 
-              <table class="table mgs-tbl ">
+              <table class="table mgs-tbl " >
 
                 <thead>
                 <tr>
+                  <th>Suggestion</th>
+                  <th>Update</th>
                   <th>Name</th>
                   <th>Category</th>
                   <th>Percentage</th>
                   <th>Element</th>
                   <th>Company</th>
                   <th>Price</th>
-                  <th>Update</th>
-                  <th>Suggestion</th>
                 </tr>
                 </thead>
 

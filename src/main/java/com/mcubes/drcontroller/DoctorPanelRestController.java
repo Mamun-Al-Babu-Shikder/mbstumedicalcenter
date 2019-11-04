@@ -37,6 +37,7 @@ public class DoctorPanelRestController {
     private static List<Contact> contactList ;
     private static List<HealthPost> healthPostList;
     private static List<HealthTipsBook> healthTipsBookList;
+    private static List<Medicine> medicineList;
     private static Map<String, String> mapData ;
 
 
@@ -504,9 +505,52 @@ public class DoctorPanelRestController {
 
 
 
+    @PostMapping("fetch-medicine-by-abc")
+    private List<Medicine> fetchMedicineByAbcOpt(@RequestParam String abcOpt){
+        SessionService.sessionBuilder(session -> {
+            Transaction t = session.beginTransaction();
+            if(abcOpt.equals("#")){
+                medicineList = session.createQuery("from Medicine where name like '1%' or name like '2%'" +
+                                " or name like '3%' or name like '4%' or name like '5%' or name like '6%' or name like '7%'" +
+                                "or name like '8%' or name like '9%' or name like '0%' "
+                        , Medicine.class).list();
+            }else {
+                medicineList = session.createNativeQuery("select * from Medicine where name like '" + abcOpt + "%'", Medicine.class).list();
+            }
+            t.commit();
+        });
+        return medicineList;
+    }
 
 
+    @PostMapping("save-or-remove-medicine-suggestion")
+    private boolean saveOrRemoveMedicineSuggestion(@RequestParam Integer id, @RequestParam int sugg){
+        b = false;
+        SessionService.sessionBuilder(session -> {
+            try {
+                Transaction t = session.beginTransaction();
+                Medicine medicine = session.createQuery("from Medicine where id=" + id, Medicine.class).getSingleResult();
+                medicine.setSuggestion(sugg);
+                session.update(medicine);
+                t.commit();
+                b = true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+        return b;
+    }
 
+
+    @PostMapping("fetch-suggestion-medicine")
+    private List<Medicine> fetchSuggestionMedicine() {
+        SessionService.sessionBuilder(session -> {
+            Transaction t = session.beginTransaction();
+            medicineList = session.createQuery("from Medicine where suggestion=1", Medicine.class).list();
+            t.commit();
+        });
+        return medicineList;
+    }
 
 
 }

@@ -178,7 +178,8 @@ public class HealthController {
 
 
     @PostMapping("comment-to-blog")
-    private @ResponseBody boolean commentToBlog(@RequestParam String name, @RequestParam String email,
+    @ResponseBody
+    private boolean commentToBlog(@RequestParam String name, @RequestParam String email,
                                                 @RequestParam String mgs){
         return true;
     }

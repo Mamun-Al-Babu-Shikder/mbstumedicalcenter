@@ -93,9 +93,9 @@
             });
 
 
-            $("#medicineTblBody tr").click(function () {
-                $("#medicineName").text($(this).children("td").text() );
-            });
+//            $("#medicineTblBody tr").click(function () {
+//                $("#medicineName").text($(this).children("td").text() );
+//            });
 
 
             $("#sendMedicineToPrescription").click(function () {
@@ -107,11 +107,14 @@
 
                 medicine =  $("#medicineName").text();
                 if(medicine!=''){
-                    $(".text-area").val(preText + medicine +" ("+ $("#morning").val()+" + "+ $("#noon").val() +" + "+$("#night").val() +") "+ postText);
+                    if($("#morning").val()!=0 || $("#noon").val()!=0 || $("#night").val()!=0){
+                        $(".text-area").val(preText + medicine +" ("+ $("#morning").val()+" + "+ $("#noon").val() +" + "+$("#night").val() +") "+ postText);
+                    }else{
+                        $(".text-area").val(preText + medicine +" "+ postText);
+                    }
                 }
             });
         });
-
 
 
 
@@ -250,12 +253,32 @@
         }
         */
 
-
-
         function clearPrescription() {
             $(".text-area").val('');
         }
 
+
+        $(document).ready(function () {
+
+            $.post("fetch-suggestion-medicine", function (data) {
+                tblRow="";
+                messageList = data;
+                for(i=0;i<data.length;i++){
+                    medicine = data[i];
+                    tblRow+='<tr onclick="selectedMedicine(this, '+i+')">';
+                    tblRow+='<td>'+medicine.name+' ('+medicine.percentage+')'+'</td>';
+                    tblRow+='</tr>';
+                }
+                $("#medicineTblBody").empty();
+                $("#medicineTblBody").append(tblRow);
+            });
+        });
+
+        function selectedMedicine(ctx, mindex) {
+           // selected_medicine_details = messageList[mindex];
+            //alert(Object.values(selected_medicine_details));
+            $("#medicineName").text($(ctx).children("td").text() );
+        }
 
     </script>
 
@@ -263,8 +286,6 @@
 
     <!-- Page Content -->
     <div class="container" style="padding-top: 100px">
-
-
 
 
         <div class="row">
@@ -282,56 +303,8 @@
 
                     <div style="margin-top: 7px; overflow-y: scroll; height: 225px">
 
-                        <table class="table table-hover">
-
-                            <tbody id="medicineTblBody">
-                                <tr>
-                                    <td>Napa</td>
-                                </tr>
-                                <tr>
-                                    <td>Tofen</td>
-                                </tr>
-                                <tr>
-                                    <td>Paracitamol</td>
-                                </tr>
-                                <tr>
-                                    <td>Napa</td>
-                                </tr>
-                                <tr>
-                                    <td>Tofen</td>
-                                </tr>
-                                <tr>
-                                    <td>Paracitamol</td>
-                                </tr>
-                                <tr>
-                                    <td>Napa</td>
-                                </tr>
-                                <tr>
-                                    <td>Tofen</td>
-                                </tr>
-                                <tr>
-                                    <td>Paracitamol</td>
-                                </tr>
-                                <tr>
-                                    <td>Napa</td>
-                                </tr>
-                                <tr>
-                                    <td>Tofen</td>
-                                </tr>
-                                <tr>
-                                    <td>Paracitamol</td>
-                                </tr>
-                                <tr>
-                                    <td>Napa</td>
-                                </tr>
-                                <tr>
-                                    <td>Tofen</td>
-                                </tr>
-                                <tr>
-                                    <td>Paracitamol</td>
-                                </tr>
-                            </tbody>
-
+                        <table class="table table-hover" style="font-size: 13px; font-weight: 500">
+                            <tbody id="medicineTblBody"></tbody>
                         </table>
 
                     </div>
