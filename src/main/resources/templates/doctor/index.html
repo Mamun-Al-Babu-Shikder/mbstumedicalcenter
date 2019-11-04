@@ -407,12 +407,6 @@
 
 
 
-
-
-
-
-
-
       function viewHealthTipsBook(i) {
 
           healthTipsBook = healthTipsBookList[i];
@@ -441,22 +435,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
   </script>
-
-
-
-
-
-
 
 
 
@@ -610,6 +589,7 @@
 
 <!-- Compose Message Modal -->
 <div class="modal fade" id="sendMessageModal">
+
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal Header -->
@@ -641,6 +621,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 
@@ -1848,14 +1829,14 @@
                                 '<i class="fa fa-times" aria-hidden="true"></i> </button></td>';
                         }
                         tblRow+='<td><button style="font-size: 10px;" type="button" ' +
-                            ' onclick="" class="btn btn-primary"> ' +
+                            '  onclick="openUpdateMedicineModal('+i+')" class="btn btn-primary"> ' +
                             '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> </button></td>';
-                        tblRow+='<td>'+medicine.name+'</td>';
-                        tblRow+='<td >'+medicine.category+'</td>';
-                        tblRow+='<td >'+medicine.percentage+'</td>';
-                        tblRow+='<td >'+medicine.element+'</td>';
-                        tblRow+='<td >'+medicine.company+'</td>';
-                        tblRow+='<td>'+medicine.price+'</td>';
+                        tblRow+='<td >'+medicine.name+'</td>';
+                        tblRow+='<td id="tdMediCategory'+i+'" >'+medicine.category+'</td>';
+                        tblRow+='<td id="tdMediPercentage'+i+'" >'+medicine.percentage+'</td>';
+                        tblRow+='<td id="tdMediElement'+i+'" >'+medicine.element+'</td>';
+                        tblRow+='<td id="tdMediCompany'+i+'" >'+medicine.company+'</td>';
+                        tblRow+='<td id="tdMediPrice'+i+'" >'+medicine.price+'</td>';
                         tblRow+='</tr>';
                     }
                     $("#medicineListTblBody").empty();
@@ -1896,9 +1877,98 @@
             }
 
 
+            function openUpdateMedicineModal(index) {
 
+                selectedMedinineIndex = index;
+                medicine = messageList[index];
+                $("#updateMediName").val(medicine.name);
+                $("#updateMediCategory").val($("#tdMediCategory"+selectedMedinineIndex).text());
+                $("#updateMediPercentage").val($("#tdMediPercentage"+selectedMedinineIndex).text());
+                $("#updateMediElement").val($("#tdMediElement"+selectedMedinineIndex).text());
+                $("#updateMediCompany").val($("#tdMediCompany"+selectedMedinineIndex).text());
+                $("#updateMediPrice").val($("#tdMediPrice"+selectedMedinineIndex).text());
+
+                $("#updateMedicineModal").modal('show');
+            }
+
+
+            function updateMedicine() {
+
+                if($("#updateMediCategory").val()!='' && $("#updateMediPercentage").val()!='' && $("#updateMediPercentage").val()
+                &&  $("#updateMediElement").val()!='' && $("#updateMediCompany").val()!='' && $("#updateMediPrice").val()!='' ){
+
+                    $("#updateMedicineModal").modal('hide');
+
+                    $("#overlay").show();
+                    $.post("update-medicine-details",{
+                        id:medicine.id, name: medicine.name, category: $("#updateMediCategory").val(),
+                        percentage: $("#updateMediPercentage").val(), element: $("#updateMediElement").val(),
+                        company: $("#updateMediCompany").val(), price: $("#updateMediPrice").val(), suggestion:medicine.suggestion
+                    }, function (data) {
+                        $("#overlay").hide();
+                        if(data){
+                            $("#success-mgs").text("Medicine info successfully updated.");
+                            $("#succeessToast").toast('show');
+
+                            $("#tdMediCategory"+selectedMedinineIndex).text($("#updateMediCategory").val());
+                            $("#tdMediPercentage"+selectedMedinineIndex).text($("#updateMediPercentage").val());
+                            $("#tdMediElement"+selectedMedinineIndex).text($("#updateMediElement").val());
+                            $("#tdMediCompany"+selectedMedinineIndex).text($("#updateMediCompany").val());
+                            $("#tdMediPrice"+selectedMedinineIndex).text($("#updateMediPrice").val());
+
+                        }else{
+                            $("#failedToast").text("Medicine info can't updated, Please try again.");
+                            $("#failedToast").toast('show');
+                        }
+                    });
+
+                }
+
+            }
 
           </script>
+
+
+
+
+          <!-- Update Medicine Modal -->
+          <div class="modal fade" id="updateMedicineModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Update Medicine</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                  <div class="row">
+
+                    <div class="col-md-6 ">
+                      <input id="updateMediName" class="input-box" type="text" readonly placeholder="Enter patient id">
+                      <input id="updateMediCategory" class="input-box" type="text" placeholder="Enter Category">
+                      <input id="updateMediPercentage" class="input-box" type="text" placeholder="Enter Percentage/Amount">
+                    </div>
+
+                    <div class="col-md-6 ">
+                      <input id="updateMediElement" class="input-box" type="text" placeholder="Enter Element">
+                      <input id="updateMediCompany" class="input-box" type="text" placeholder="Enter Company Name">
+                      <input id="updateMediPrice" class="input-box" type="text" placeholder="Enter Price">
+                    </div>
+
+                  </div>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" onclick="updateMedicine()">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
 
 
@@ -1938,8 +2008,6 @@
               </select>
 
 
-
-
               <div style=" text-align: right; float: right">
                 <div style=" text-align: left; width: 250px;">
                   <div class="input-group">
@@ -1951,7 +2019,6 @@
                 </div>
               </div>
             </div>
-
 
 
             <div class="mgs-tbl-holder table-hover">
@@ -1977,23 +2044,9 @@
 
             </div>
 
-
           </div>
 
-
-
-
-
-
-
         </section>
-
-
-
-
-
-
-
 
 
           <!--ABOUT US SECTION-->
@@ -2043,11 +2096,8 @@
                     <li>Also grateful to all the honourable Teachers of MBSTU.</li>
                     <li>Special thanks to, Mamunurrashid Mamun, ICT 11th Batch</li>
                   </ul>
-
                 </div>
-
               </div>
-
             </div>
 
             <div align="center" style="text-align: center">
@@ -2092,24 +2142,6 @@
 
 
         </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       </div>

@@ -553,4 +553,36 @@ public class DoctorPanelRestController {
     }
 
 
+    @PostMapping("update-medicine-details")
+    private boolean updateMedicineInfo( @RequestParam Long id, @RequestParam String name, @RequestParam String category,
+                                        @RequestParam String percentage, String element, @RequestParam String company,
+                                        @RequestParam String price, @RequestParam Integer suggestion)
+    {
+        b = false;
+
+        Medicine medicine = new Medicine();
+        medicine.setId(id);
+        medicine.setName(name);
+        medicine.setCategory(category);
+        medicine.setPercentage(percentage);
+        medicine.setElement(element);
+        medicine.setCompany(company);
+        medicine.setPrice(price);
+        medicine.setSuggestion(suggestion);
+
+        SessionService.sessionBuilder(session -> {
+            try{
+                Transaction t = session.beginTransaction();
+                session.update(medicine);
+                t.commit();
+                b = true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+        return b;
+    }
+
+
+
 }

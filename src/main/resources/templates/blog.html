@@ -63,14 +63,17 @@
             }
         }
 
+    </script>
 
+
+    <script>
         /*
          @ Subscribe Request
          */
         function subscribeRequest() {
 
             subscriberEmail = $(".subscribe-email").val();
-            if (!validateEmail(subscriberEmail)) {
+            if (!validateEmail2(subscriberEmail)) {
                 $("#toast-mgs").text("Please enter valid email address and try again.");
                 $('#tost').toast('show');
             } else {
@@ -90,8 +93,13 @@
         }
 
 
+        function validateEmail2(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
 
     </script>
+
 
 
 

@@ -25,11 +25,40 @@
     <!-- <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
     <!-- <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
 
-    <style>
+    <script>
+        /*
+         @ Subscribe Request
+         */
+        function subscribeRequest() {
+
+            subscriberEmail = $(".subscribe-email").val();
+            if (!validateEmail(subscriberEmail)) {
+                $("#toast-mgs").text("Please enter valid email address and try again.");
+                $('#tost').toast('show');
+            } else {
+                $("#overlay").show();
+                $.post("send-subscribe-request",{subscriberEmail:subscriberEmail}, function (data, status) {
+                    $(".subscribe-email").val('');
+                    $("#overlay").hide();
+                    if(data){
+                        $("#toast-mgs2").text("You successfully subscribed.");
+                        $('#tost2').toast('show');
+                    }else{
+                        $("#toast-mgs").text("Already subscribed by this email.");
+                        $('#tost').toast('show');
+                    }
+                })
+            }
+        }
 
 
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
 
-    </style>
+    </script>
+
 
 
 </head>

@@ -43,7 +43,7 @@ function sendContactMessage() {
 
 
 
-
+/*
 function subscribeRequest() {
 
     subscriberEmail = $(".subscribe-email").val();
@@ -66,6 +66,7 @@ function subscribeRequest() {
     }
 
 }
+*/
 
 
 
