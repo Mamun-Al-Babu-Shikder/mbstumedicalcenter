@@ -17,18 +17,6 @@
         <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
 
 
-        <!--Configuration for POSTGRESQL-->
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://ec2-174-129-253-68.compute-1.amazonaws.com:5432/d8of5tn4sb8m9i</property>
-        <property name="hibernate.connection.username">nbronelldqphqj</property>
-        <property name="hibernate.connection.password">72cf7876238bc29bc014d1f36fdedfd510024d951b0548d637bffd9a8c466c98</property>
-        <property name="hibernate.connection.pool_size">100</property>
-        <property name="hibernate.current_session_context_class">thread</property>
-        <property name="hibernate.show_sql">true</property>
-        <!--<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>-->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-
         <mapping class="com.mcubes.model.Patient"/>
         <mapping class="com.mcubes.model.Doctor"/>
         <mapping class="com.mcubes.model.Prescription"/>
@@ -38,11 +26,6 @@
         <mapping class="com.mcubes.model.HealthTipsBook"/>
         <mapping class="com.mcubes.model.Subscriber"/>
         <mapping class="com.mcubes.model.Medicine"/>
-
-
-
-
-
 
 
     </session-factory>
